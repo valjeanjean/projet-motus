@@ -1,0 +1,69 @@
+@media only screen and (max-width: 600px) {
+  
+    .nav-list li{
+
+        font-size: 1.2em !important;
+    }
+}
+
+header{
+
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #afd6fa;
+}
+
+.nav-list{
+    
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    padding: 10px;
+    
+    
+}
+
+.nav-list li{
+
+    color: #59a9ff; /* bleu marine ou noir bleuté */
+    list-style: none;
+    cursor: pointer;
+    transition: 0.8s ease;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);   
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    background-color: #d4e3fa;
+    padding: 10px;
+    font-size: 1.7em;
+
+}
+
+/* -------------------------------------------------- */
+
+    /* SECTION STYLE DES PAGES DU MENU NAVIGATION */
+
+.jouer:hover{
+    
+    color: rgb(253, 106, 106);
+    border: 1px solid #fa6d6d;
+}
+
+.hall-of-fame:hover{
+
+    color: #eeff00;
+    border: 1px solid #d1ff05;
+}
+
+.a-determiner:hover{
+
+
+    color: rgb(86, 106, 216);
+    border: 1px solid rgb(86, 106, 216);
+}
+
+
+/* ---------------------------------------------------- */

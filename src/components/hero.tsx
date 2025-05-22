@@ -3,6 +3,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./hero.css";
+import Link from "next/link";
 
 export default function Hero(){
 
@@ -20,7 +21,7 @@ export default function Hero(){
             </div>
 
             <div className="play-button-container">
-                <a href="/game"><button>JOUER</button></a>
+                <Link href="/game"><button>JOUER</button></Link>
             </div>
 
 

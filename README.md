@@ -30,7 +30,7 @@ Services inclus dans la composition Docker
 > [NOTE]
 > Docker installé et démarré sur votre post de travail
 
-Pour initialiser le container, dans votre terminal executer
+Pour initialiser le container, dans votre terminal executer la commande suivante : 
 
 ```bash
 docker compose up -d

@@ -20,6 +20,22 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Docker compose
+
+Services inclus dans la composition Docker
+
+- Mysql 8
+- Adminer
+
+> [NOTE]
+> Docker installer et démarrer sur votre post de travail
+
+Pour initialiser le container, dans votre terminal executer
+
+```bash
+docker compose up -d
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

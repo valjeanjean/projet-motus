@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: motus-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword      
+      MYSQL_DATABASE: projet_motus             
+      MYSQL_USER: motus_user                  
+      MYSQL_PASSWORD: motus_laplateforme        
+    ports:
+      - "3306:3306"                        
+    volumes:
+      - mysql-data:/var/lib/mysql            
+
+  adminer:
+    container_name: adminer_motus
+    image: adminer
+    restart: always
+    ports:
+      - 8100:8080
+
+
+volumes:
+  mysql-data:

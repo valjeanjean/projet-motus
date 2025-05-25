@@ -13,7 +13,7 @@ export default function Header(){
             <ul className="nav-list">
                 <li className="jouer">Jouer</li>
                 <li className="hall-of-fame">Hall of Fame</li>
-                <li className="a-determiner">À définir ?</li>
+                <li className="a-determiner">Connexion</li>
             </ul>
 
         </header>

@@ -1,0 +1,27 @@
+.single-row-container{
+
+    display: flex;
+    justify-content: center;
+    color: white;
+    width: 100%;
+    
+    
+
+
+
+}
+
+.single-row-container div{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5em;
+    min-width: 10%;
+    height: 100%;
+    border: 1px solid #ffffff;
+    background: #0066D0;
+    background: linear-gradient(0deg,rgba(0, 102, 208, 1) 28%, rgb(0, 143, 226) 100%);
+
+}
+

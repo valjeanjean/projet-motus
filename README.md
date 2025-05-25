@@ -28,7 +28,7 @@ Services inclus dans la composition Docker
 - Adminer
 
 > [NOTE]
-> Docker installer et démarrer sur votre post de travail
+> Docker installé et démarré sur votre post de travail
 
 Pour initialiser le container, dans votre terminal executer
 

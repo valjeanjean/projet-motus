@@ -1,14 +1,22 @@
+@media only screen and (max-width: 600px) {
+  
+    .single-row-container div{
+
+        min-width: 15% !important;
+    }
+}
+
+
+
 .single-row-container{
 
     display: flex;
     justify-content: center;
+    align-self: center;
     color: white;
     width: 100%;
-    
-    
-
-
-
+    max-height: 15%;
+    height: 100%;
 }
 
 .single-row-container div{
@@ -22,6 +30,6 @@
     border: 1px solid #ffffff;
     background: #0066D0;
     background: linear-gradient(0deg,rgba(0, 102, 208, 1) 28%, rgb(0, 143, 226) 100%);
-
+    cursor: text;
 }
 

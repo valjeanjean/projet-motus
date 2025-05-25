@@ -3,3 +3,7 @@
 Début du projet, arborescence faite et layout fait;
 Composants : Hero fait
 Ajout de style dans le globals.css 
+
+
+Il faut rajouter les <input> dans les lignes pour chaque case pour
+que le joueur puisse écrire + qu'on puisse récupérer l'input

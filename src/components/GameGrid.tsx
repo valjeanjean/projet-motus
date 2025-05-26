@@ -15,8 +15,6 @@ export default function GameGrid(){
 
     useEffect(()=>{
 
-
-
         async function getWord(){
 
         console.log("Entrée début fonction getword");

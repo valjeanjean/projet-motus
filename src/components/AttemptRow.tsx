@@ -11,12 +11,13 @@ export default function AttemptRow(){
 
         <div className="single-row-container">
 
-            <div></div>
-            <div>.</div>
-            <div>.</div>
-            <div>.</div>
-            <div>.</div>
-            <div>.</div>
+            <input id="myText" type="text"/>
+            <input id="myText" type="text" placeholder="." maxLength={1}/>
+            <input id="myText" type="text" placeholder="." maxLength={1}/>
+            <input id="myText" type="text" placeholder="." maxLength={1}/>
+            <input id="myText" type="text" placeholder="." maxLength={1}/>
+            <input id="myText" type="text" placeholder="." maxLength={1}/>
+            
 
         </div>
     )

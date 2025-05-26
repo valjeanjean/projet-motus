@@ -2,7 +2,14 @@
   
     .single-row-container div{
 
-        min-width: 15% !important;
+        max-height: 100%;
+        
+    }
+    
+    #myText{
+        
+        max-height: 100%;
+
     }
 }
 
@@ -33,3 +40,16 @@
     cursor: text;
 }
 
+#myText{
+
+    background: linear-gradient(0deg,rgba(0, 102, 208, 1) 28%, rgb(0, 143, 226) 100%);
+    border: 1px solid #ffffff;
+    text-align: center;
+    font-size: 1em;
+    outline: 0;
+    color: white;
+    font-size: 4em;
+    max-width: 10%;
+    text-transform: uppercase;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

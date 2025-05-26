@@ -12,7 +12,6 @@ export async function GET(){
     const response = await fetch(urlToFetch);
     const data = await response.json();
     const fetchedWord = data[0].name; 
-    
     console.log("Mot récupéré : ");
     console.log(fetchedWord);
 

@@ -7,11 +7,13 @@ import "./components-styles/GameGrid.css"
 
 export default function GameGrid(){
 
+    // Variable contenant la valeur associée à la difficulté
     const maxAttempts = 6;
 
     /* Supprimer le fetch etc... */
 
-    const [word, setWord] = useState("");
+    const [wordInfos, setWordInfos] = useState(null);
+    const [wordLength, setWordLength] = useState(0);
 
     useEffect(()=>{
 
@@ -32,8 +34,9 @@ export default function GameGrid(){
             console.log("Taille du mot : ");
             console.log(wordObject.wordLength);
             
+            setWordInfos(wordObject);
         }
-
+        
         getWord();
 
     }, []);
@@ -41,12 +44,12 @@ export default function GameGrid(){
     return(
 
         <div className="rows-container-grid">
-            <AttemptRow />
-            <AttemptRow />
-            <AttemptRow />
-            <AttemptRow />
-            <AttemptRow />
-            <AttemptRow />
+            {[...Array(maxAttempts)].map((element, index) => (
+                
+                <AttemptRow key={index} wordInfos={wordInfos}/>
+
+            ))}
+    
         </div>
     )
 

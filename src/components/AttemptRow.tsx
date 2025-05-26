@@ -4,11 +4,20 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./components-styles/AttemptRow.css";
 
-export default function AttemptRow(){
+// wordLength: number 
 
-    const letterTest = 'A';
-    const [word, setWord] = useState<string>("sar");
-    
+
+
+export default function AttemptRow({wordInfos}: any){
+
+    if(!wordInfos){
+
+        return null;
+    }
+
+    const [letters, setLetters] = useState([]);
+    const wordLength = wordInfos.wordLength;
+    const firstLetter = wordInfos.firstLetter;
     // const inputArray = [];
     // for (let i = 0; i < ; i++) {
     //     const element = [i];
@@ -25,12 +34,11 @@ export default function AttemptRow(){
 
             {/* <div className="first-letter-square"></div> */}
             {/* { inputArray } */}
-
-            <input id="myText" type="text" placeholder={letterTest} maxLength={1}/>
-            <input id="myText" type="text" placeholder="." maxLength={1}/>
-            <input id="myText" type="text" placeholder="." maxLength={1}/>
-            <input id="myText" type="text" placeholder="." maxLength={1}/>
-            <input id="myText" type="text" placeholder="." maxLength={1}/>
+            {/* Utilisation de l'opérateur ternaire pour afficher la première lettre seulement pour la première case */}
+            {[...Array(wordLength)].map((element, index) =>(
+                <input id="myText" key={index} type="text" maxLength={1} placeholder={index == 0 ? wordInfos.firstLetter : "."}/>
+            ))}
+           
             
         </form>
     )

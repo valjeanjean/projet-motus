@@ -11,7 +11,8 @@ que le joueur puisse écrire + qu'on puisse récupérer l'input
 Modifier les noms des classes/ID pour les lignes
 (AttemptRow => wordRow);
 
-Pour passer à la case d'après après l'input
+
+Pour passer à la case d'après après l'input :
 
 <input onChange={pushLetterFunction}>
 pushLater(event){
@@ -19,6 +20,15 @@ pushLater(event){
     event.target.nextElementSibling.focus()
 }
 
+
 Faire en sorte que lorsqu'on a vérifié pour la dernière fois le mot
 (Victoire ou défaite), supprimer de la table Game le mot à deviner
 associé au playerID.
+
+26/05 :
+
+Ajout dyanmique des balises input dans le composant AttemptRow
+Ajout dynamique des balises <AttemptRow /> dans le composant GameGrid
+
+[...Array(6)] = Création d'un tableau de taille 6 initialisé (6 x undefined);
+.map pour faire un tableau pour pouvoir itérer dessus

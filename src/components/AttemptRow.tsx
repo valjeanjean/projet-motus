@@ -6,20 +6,33 @@ import "./components-styles/AttemptRow.css";
 
 export default function AttemptRow(){
 
-
+    const letterTest = 'A';
+    const [word, setWord] = useState<string>("sar");
+    
+    // const inputArray = [];
+    // for (let i = 0; i < ; i++) {
+    //     const element = [i];
+        
+    // }
+    // word.split("").map((letter,i)=>{
+    //     return <input id="myText" type="text" placeholder={letter} maxLength={1} onChange={setWord()}/>
+    // })
     return(
 
-        <div className="single-row-container">
+        <form className="single-row-container">
+            
+            {/* Changer div pour un form ? */}
 
-            <input id="myText" type="text"/>
-            <input id="myText" type="text" placeholder="." maxLength={1}/>
+            {/* <div className="first-letter-square"></div> */}
+            {/* { inputArray } */}
+
+            <input id="myText" type="text" placeholder={letterTest} maxLength={1}/>
             <input id="myText" type="text" placeholder="." maxLength={1}/>
             <input id="myText" type="text" placeholder="." maxLength={1}/>
             <input id="myText" type="text" placeholder="." maxLength={1}/>
             <input id="myText" type="text" placeholder="." maxLength={1}/>
             
-
-        </div>
+        </form>
     )
 
 }

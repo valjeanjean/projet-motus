@@ -53,3 +53,9 @@
     text-transform: uppercase;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+input::placeholder{
+
+    color: white;
+    opacity: 0.8;
+}

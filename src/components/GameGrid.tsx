@@ -19,7 +19,6 @@ export default function GameGrid(){
 
         console.log("Entrée début fonction getword");
 
-
             const response = await fetch("/api/word");
             if(!response.ok){
 
@@ -32,11 +31,12 @@ export default function GameGrid(){
             console.log(wordObject.firstLetter);
             console.log("Taille du mot : ");
             console.log(wordObject.wordLength);
+            
         }
 
         getWord();
-    }, []);
 
+    }, []);
 
     return(
 
@@ -49,7 +49,5 @@ export default function GameGrid(){
             <AttemptRow />
         </div>
     )
-
-
 
 }

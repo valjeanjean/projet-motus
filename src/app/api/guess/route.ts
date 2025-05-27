@@ -1,6 +1,5 @@
 import db from "@/lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import mysql from "mysql2"
 
 export default async function handleGuess(req: NextApiRequest, res: NextApiResponse){
  
@@ -13,7 +12,10 @@ export default async function handleGuess(req: NextApiRequest, res: NextApiRespo
 
    const fakePlayerID = 1;
 
+   /* Récupération de la tentative du joueur */
    const guess = req.body;
+
+   /* Récupération du mot à trouver dans la BDD */
 
     const [allRows]: any = await db.execute(
 
@@ -33,11 +35,11 @@ export default async function handleGuess(req: NextApiRequest, res: NextApiRespo
         
         if(letter == wordToFindArray[index]){
 
-            console.log("Bonne lettre pour la position " + index + " de la ligne");
+            console.log("Bonne lettre pour la " + index + "ème case de la ligne");
         
         }else{
 
-            console.log("Mauvaise lettre pour la position " + index + " de la ligne");
+            console.log("Mauvaise lettre pour la " + index + "ème case de la ligne");
 
         }
 

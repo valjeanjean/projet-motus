@@ -31,13 +31,19 @@ export default function AttemptRow({wordInfos}: any){
 
         event.preventDefault();
 
+        /* Récupération des données présents dans le form */
         const formData = new FormData(event.currentTarget);
         const letters = [wordLength];
+
+        /* Initialisation du tableau avec les valeurs des inputs */
 
         for (let i = 0; i < wordLength; i++) {
             
             letters[i] = formData.get("letter-" + i);
         }
+
+        /* Envoi du mot vers le backend pour la vérification */
+        /* À déplacer plutôt dans GameGrid ? */
 
         const response = await fetch("/api/guess", {
 
@@ -46,8 +52,7 @@ export default function AttemptRow({wordInfos}: any){
                 "Content-Type": "application/json",
             },
 
-            body: JSON.stringify(letters);
-
+            body: JSON.stringify(letters)
             /* A check */
 
         });
@@ -58,7 +63,6 @@ export default function AttemptRow({wordInfos}: any){
 
         <form className="single-row-container" onSubmit={guessHandler}>
             
-            {/* Changer div pour un form ? */}
 
             {/* <div className="first-letter-square"></div> */}
             {/* { inputArray } */}

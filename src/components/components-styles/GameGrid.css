@@ -16,3 +16,14 @@
     height: 100%;
     justify-content: center;
 }
+
+.game-over-container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90%;
+    color: white;
+    
+
+}

@@ -14,6 +14,8 @@ export default function GameGrid(){
 
     const [wordInfos, setWordInfos] = useState(null);
     const [wordLength, setWordLength] = useState(0);
+    const [attemptsNumber, setAttemptsNumber] = useState(0);
+    const [isGameFinished, setIsGameFinished] = useState(true);
 
     useEffect(()=>{
 
@@ -41,15 +43,32 @@ export default function GameGrid(){
 
     }, []);
 
+    console.log(isGameFinished);
+
     return(
 
         <div className="rows-container-grid">
-            {[...Array(maxAttempts)].map((element, index) => (
-                
-                <AttemptRow key={index} wordInfos={wordInfos}/>
 
-            ))}
+            {isGameFinished ? (
+
+                <div className="game-over-container">
+
+                    <h1 className="game-over-title">Partie terminée !</h1>
+                    <p>Nombre de points : X</p>
+
+                </div>
+
+            ) : (
+
+                
+                [...Array(maxAttempts)].map((element, index) => (
+                    
+                    <AttemptRow key={index} wordInfos={wordInfos} attemptsNumber={attemptsNumber}/>
     
+                ))
+        
+            )}
+
         </div>
     )
 

@@ -26,7 +26,7 @@ export async function GET(){
     console.log("Première lettre du mot : ");
     console.log(firstLetter);
 
-    await (await db).query("INSERT INTO Game (wordToGuess)  VALUES (?)", [fetchedWord]);
+    await db.query("INSERT INTO Game (wordToGuess)  VALUES (?)", [fetchedWord]);
 
     console.log(data);
 

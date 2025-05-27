@@ -32,3 +32,17 @@ Ajout dynamique des balises <AttemptRow /> dans le composant GameGrid
 
 [...Array(6)] = Création d'un tableau de taille 6 initialisé (6 x undefined);
 .map pour faire un tableau pour pouvoir itérer dessus
+
+Faire un bouton ou quelque chose pour les règles, lorsqu'on appuie dessus un pop up apparait ou un truc du genre pour ensuite afficher
+les règles, comme par exemple appuyer sur entrée lorsque le mot tapé est complet, ou alors faire en sorte de check la longueur
+de la chaine, et si la chaine != wordLength alors on ne fait pas de requête post vers la route api/guess pour ne pas vérifier
+
+Trouver un moyen de "verrouiller" toutes les lignes sauf celle jouable
+
+Lorsque le premier composant interragit avec la BDD (pseudo),
+c'est lui qui va créer la ligne dans ma table Player pour ce joueur.
+Je dois ensuite récupérer le insertID, et l'envoyer en réponse au 
+client pour le stocker dans le localstorage. Lorsque je dois modifier 
+un champ de sa table (les points par exemple), j'envoie le playerID stocké en localstorage,
+et je fais un update sur ce champ la en précisant (UPDATE Player SET points = +50pts WHERE playerID = variable.insertID)
+un truc comme ça 

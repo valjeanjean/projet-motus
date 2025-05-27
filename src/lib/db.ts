@@ -2,7 +2,7 @@ import mysql from "mysql2/promise";
 
 /* mysql.createConnection asynchrone ? */
 /* mysql.createPool ? */
-const db = mysql.createConnection({
+const db = await mysql.createConnection({
 
     host: "localhost",
     port: 3306,

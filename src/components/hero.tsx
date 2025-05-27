@@ -16,14 +16,13 @@ export default function Hero(){
             </div>
 
             <div className="rules-container">
-                <p>Vous aurez une grille avec X essais par grille.</p>
+                <p>Vous aurez une grille avec 6 essais par grille.</p>
                 <p>Vous aurez à chaque début de partie la première lettre du mot à trouver.</p>
             </div>
 
             <div className="play-button-container">
                 <Link href="/game"><button>JOUER</button></Link>
             </div>
-
 
         </>
 

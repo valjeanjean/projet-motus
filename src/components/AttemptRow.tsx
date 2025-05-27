@@ -45,8 +45,10 @@ export default function AttemptRow({wordInfos}: any){
             headers:{
                 "Content-Type": "application/json",
             },
-            //body: JSON.stringify()
 
+            body: JSON.stringify(letters);
+
+            /* A check */
 
         });
 

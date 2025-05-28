@@ -36,7 +36,7 @@ DEFAULT CHARACTER SET = armscii8;
 CREATE TABLE IF NOT EXISTS `projet_motus`.`Game` (
   `gameID` INT NOT NULL AUTO_INCREMENT,
   `wordToGuess` VARCHAR(45) NULL,
-  `playerID` INT NULL,
+  `playerID` INT NOT NULL,
   PRIMARY KEY (`gameID`),
   INDEX `fk_Game_playerID_idx` (`playerID` ASC) VISIBLE,
   CONSTRAINT `fk_Game_playerID`

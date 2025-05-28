@@ -15,7 +15,7 @@ export default function GameGrid(){
     const [wordInfos, setWordInfos] = useState(null);
     const [wordLength, setWordLength] = useState(0);
     const [attemptsNumber, setAttemptsNumber] = useState(0);
-    const [isGameFinished, setIsGameFinished] = useState(true);
+    const [isGameFinished, setIsGameFinished] = useState(false);
 
     function handleAttempts(data: any){
 
@@ -65,16 +65,13 @@ export default function GameGrid(){
 
             ) : (
 
-                
                 [...Array(maxAttempts)].map((element, index) => (
                     
-                    <AttemptRow onSubmit={handleAttempts} key={index} wordInfos={wordInfos} attemptsNumber={attemptsNumber}/>
+                    <AttemptRow key={index} wordInfos={wordInfos} attemptsNumber={attemptsNumber}/>
     
                 ))
-        
             )}
 
         </div>
     )
-
 }

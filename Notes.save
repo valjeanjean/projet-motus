@@ -46,3 +46,11 @@ client pour le stocker dans le localstorage. Lorsque je dois modifier
 un champ de sa table (les points par exemple), j'envoie le playerID stocké en localstorage,
 et je fais un update sur ce champ la en précisant (UPDATE Player SET points = +50pts WHERE playerID = variable.insertID)
 un truc comme ça 
+
+Pour éviter d'envoyer d'autres lignes non concernées par écriture,
+changer maxlength input à 0 si ce n'est pas la ligne actuellement
+jouable
+
+SET LE attemptsNumber pour faire en sorte que le joueur ne joue plus
+lorsqu'il a réalisé 6 essais ou s'il a trouvé le mot
+Si isGameFinished == true, afficher les balises p et tout ?

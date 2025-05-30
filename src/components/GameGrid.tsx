@@ -9,7 +9,7 @@ export default function GameGrid(){
 
     // Variable contenant la valeur associée à la difficulté
     const maxAttempts = 6;
-
+    
     /* Supprimer le fetch etc... */
 
     const [wordInfos, setWordInfos] = useState(null);
@@ -17,7 +17,7 @@ export default function GameGrid(){
     const [attemptsNumber, setAttemptsNumber] = useState(0);
     const [isGameFinished, setIsGameFinished] = useState(false);
 
-    function handleAttempts(data: any){
+    function handleAttempts(){
 
         setAttemptsNumber(attemptsNumber + 1);
     }
@@ -67,8 +67,7 @@ export default function GameGrid(){
 
                 [...Array(maxAttempts)].map((element, index) => (
                     
-                    <AttemptRow key={index} wordInfos={wordInfos} attemptsNumber={attemptsNumber}/>
-    
+                    <AttemptRow key={index} wordInfos={wordInfos} onAttempt={handleAttempts}/>
                 ))
             )}
 

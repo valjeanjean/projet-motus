@@ -3,10 +3,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./components-styles/AttemptRow.css";
+import { styleText } from "util";
 
 // wordLength: number 
 
-export default function AttemptRow({wordInfos}: any){
+type Status = "misplaced" | "correct" | "incorrect";
+
+
+export default function AttemptRow({wordInfos,onAttempt}: any){
 
     if(!wordInfos){
 
@@ -14,6 +18,7 @@ export default function AttemptRow({wordInfos}: any){
     }
 
     const [letters, setLetters] = useState([]);
+    const [letterColor, setLetterColor] = useState("");
     const wordLength = wordInfos.wordLength;
     const firstLetter = wordInfos.firstLetter;
 
@@ -26,6 +31,19 @@ export default function AttemptRow({wordInfos}: any){
     // word.split("").map((letter,i)=>{
     //     return <input id="myText" type="text" placeholder={letter} maxLength={1} onChange={setWord()}/>
     // })
+
+    interface Letter{
+
+        letter: string;
+        Status: Status;
+        color: string;
+        squareIndex: number;
+    }
+
+    function handleLetterColors(results:Letter[]){
+
+
+    }
 
     async function guessHandler(event: React.FormEvent<HTMLFormElement>){
 
@@ -51,7 +69,7 @@ export default function AttemptRow({wordInfos}: any){
 
         console.log("Proposition : " + letters);
 
-        const response = await fetch("/api/guess", {
+        const correctedWord = await fetch("/api/guess", {
 
             method: "POST",
             headers:{ "Content-Type": "application/json" },
@@ -59,7 +77,26 @@ export default function AttemptRow({wordInfos}: any){
             /* A check */
 
         });
+
+        const results = await correctedWord.json();
+        console.log("Résultats reçus du backend : ");
+        console.log(results);
+        
+        // .then(res=>res.json());
+
+
+
+        onAttempt();
     }
+
+    /* 
+    
+        Utiliser useState ? const [letterColor, setLetterColor] = useState("");
+        Puis faire des if/un switch, en fonction de la couleur, faire setLetterColor
+        de la valeur de retour de cette fonction. Mettre la variable letterColor
+        dans le "style={letterColor}";
+    
+    */
 
     return(
 

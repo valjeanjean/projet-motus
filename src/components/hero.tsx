@@ -38,7 +38,7 @@ export default function Hero(){
         <>
             <div className="hero-container">
                 <h1>Bienvenue sur le jeu MOTUS !</h1>
-                <p>Le célèbre jeu d'une ancienne émission sur France 2</p>
+                <p>Le célèbre jeu d'une ancienne émission France 2</p>
             </div>
 
             <div className="rules-container">
@@ -48,7 +48,7 @@ export default function Hero(){
 
             <form className="chose-username-form" onSubmit={chooseUsername}>
 
-                <input name="username-input" type="text" maxLength={20} className="chose-username-input"/>
+                <input placeholder="Entrez un pseudo" name="username-input" type="text" maxLength={20} className="chose-username-input"/>
                 <input type="submit" hidden/>
 
             </form>

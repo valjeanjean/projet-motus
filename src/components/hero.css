@@ -57,6 +57,7 @@
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
+    height: 5%;
 }
 
 .chose-username-input{

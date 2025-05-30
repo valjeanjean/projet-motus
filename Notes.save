@@ -54,3 +54,5 @@ jouable
 SET LE attemptsNumber pour faire en sorte que le joueur ne joue plus
 lorsqu'il a réalisé 6 essais ou s'il a trouvé le mot
 Si isGameFinished == true, afficher les balises p et tout ?
+
+Faire en sorte de modifier le placeholder pour les lettres à la bonne place

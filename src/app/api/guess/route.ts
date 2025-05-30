@@ -2,19 +2,30 @@ import db from "@/lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 
+
+type Status = "misplaced" | "correct" | "incorrect";
+
 export async function POST(req: NextRequest, res: NextResponse){
  
     /* 
-    
+
         Envoyer dans la requête le playerID préalablement stocké dans
         le local storage (Faire la fonctionnalité)
-    
+
     */
+
+    interface Letter{
+
+        letter: string;
+        Status: Status;
+        color: string;
+        squareIndex: number;
+    }
 
     const fakePlayerID = 2;
 
     /* Récupération de la tentative du joueur */
-    const guess = await req.json();
+    const guess : Array<string> = await req.json();
 
     console.log("Proposition du joueur : " + guess);
 
@@ -52,45 +63,82 @@ export async function POST(req: NextRequest, res: NextResponse){
         // On renvoie un objet pour dire que le mot trouvé est le bon
     }
 
-    const results[];
+    let results: Letter[] = [];
 
-    guess.forEach((letter: any, index:number) => {        
+    guess.forEach((letter, index:number) => {        
         
+        console.log("Index actuel : ", index);
+
+
         if(letter == wordToFindArray[index]){
+
 
             console.log("Bonne lettre pour la " + index + "ème case de la ligne");
 
             results[index] = {
-
                 letter: letter,
-                status: "correct",
+                Status: "correct",
                 color: "red",
                 squareIndex: index,
             };
+
+            console.log("Vérif : ");
+            console.log(results[index]);
         
             /*
 
-                Pour lorsque la lettre est présente mais pas au bon index :
+                Pour lorsque la lettre est présente mais pas au bon index (Yellow):
 
-                    {
-                        letter: X
-                        status: correct
-                        color: yellow
-                        squareIndex:
-                    }
+                {
+                    letter: X
+                    Status: misplaced
+                    color: yellow
+                    squareIndex:
+                }
 
             */
-
 
         }else{
 
             console.log("Mauvaise lettre pour la " + index + "ème case de la ligne");
 
+                /* Vérification si une des lettres envoyées est présente dans le mot */
+                
+                if(wordToFindArray.includes(letter)){
+
+                    results[index] = {
+                        letter: letter,
+                        Status: "misplaced",
+                        color: "yellow",
+                        squareIndex: index,
+                    };
+                    
+                    console.log("lettre " + index + "présente dans le mot");
+                    console.log(results[index]);
+
+                }else{
+
+                    results[index] = {
+                        letter: letter,
+                        Status: "incorrect",
+                        color: "blue",
+                        squareIndex: index,
+                    };
+                }
+
+
+                /* 
+                
+                    Faire fonctionnalité pour vérifier si une lettre n'est pas à la
+                    bonne place mais est tout de même présente dans le mot
+                
+                */
+
         }
 
     });
 
-    return NextResponse.json("salut");
+    return NextResponse.json(results);
     // Return un objet avec les lettres à la bonne place et leurs index
     // et celles présentes dans le mot mais pas à la bonne place, avec la
     // couleur associée (rouge pour bon, jaune pour bon mais pas à la bonne place)

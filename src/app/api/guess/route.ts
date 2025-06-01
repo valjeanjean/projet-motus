@@ -22,10 +22,9 @@ export async function POST(req: NextRequest, res: NextResponse){
         squareIndex: number;
     }
 
-    const fakePlayerID = 2;
 
     /* Récupération de la tentative du joueur */
-    const guess : Array<string> = await req.json();
+    const {guess, playerID} = await req.json();
 
     console.log("Proposition du joueur : " + guess);
 
@@ -35,7 +34,7 @@ export async function POST(req: NextRequest, res: NextResponse){
 
     const [words]: any = await db.execute(
 
-        'SELECT wordToGuess FROM Game WHERE playerID = ?', [fakePlayerID]
+        'SELECT wordToGuess FROM Game WHERE playerID = ?', [playerID]
     );
 
     // Faire vérification pour être sûr que words contient bien le mot désiré
@@ -65,7 +64,7 @@ export async function POST(req: NextRequest, res: NextResponse){
 
     let results: Letter[] = [];
 
-    guess.forEach((letter, index:number) => {        
+    guess.forEach((letter:any, index:number) => {        
         
         console.log("Index actuel : ", index);
 

@@ -56,3 +56,14 @@ lorsqu'il a réalisé 6 essais ou s'il a trouvé le mot
 Si isGameFinished == true, afficher les balises p et tout ?
 
 Faire en sorte de modifier le placeholder pour les lettres à la bonne place
+
+
+                                         VÉRIFIER ET SUPPRIMER LES CLASSES (hero.css):
+-------------------------------------------------------------------------------------------------------------------------------------
+<form className="chose-username-form" onSubmit={chooseUsername}>
+
+    <input placeholder="Entrez un pseudo" name="username-input" type="text" maxLength={20} className="chose-username-input"/>
+    <input type="submit" hidden/>
+
+</form>
+-------------------------------------------------------------------------------------------------------------------------------------

@@ -26,15 +26,40 @@ export default function GameGrid(){
 
         async function getWord(){
 
-        console.log("Entrée début fonction getword");
+            const playerID = localStorage.getItem("playerID");
+            console.log("ID présent localStorage ? : " + playerID);
+            if(!playerID){
 
-            const response = await fetch("/api/word");
+                console.log("Erreur de récupération du playerID");
+                return;
+            }
+
+            console.log("Entrée début fonction getword");
+
+            const response = await fetch("/api/word", {
+
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+
+                    playerID: playerID
+                }),
+            });
+
             if(!response.ok){
 
                 console.log("Erreur lors de la récupération du mot");
                 return;
             }
             const wordObject = await response.json();
+
+            // const response = await fetch("/api/user", {
+    
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify(userInfos),
+    
+            // });
 
             console.log("Première lettre : ");
             console.log(wordObject.firstLetter);

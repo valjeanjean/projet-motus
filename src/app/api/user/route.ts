@@ -1,11 +1,23 @@
 import db from "@/lib/db";
+import { ResultSetHeader } from "mysql2";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(req: NextRequest){
 
-    const username = await req.json();
+    const userInfos = await req.json();
+    console.log(userInfos);
+    const username = userInfos.username;
+    const userPassword = userInfos.password;
 
-    await db.query("INSERT INTO Player (username)  VALUES (?)", [username]);
+    /* Ajout des infos dans la BDD et initialisation des points à 0 */
+    const [result] = await db.query<ResultSetHeader>("INSERT INTO Player (username, password, points)  VALUES (?, ?, ?)", [username, userPassword, 0]);
+
+    const playerInfos = {
+
+        username: username,
+        playerID: result.insertId,
+        
+    }
 
     // Récupérer insertID ? 
     // const something = await db.query(insert...)
@@ -21,6 +33,14 @@ export async function POST(req: NextRequest){
     
     */
 
+    
+
     console.log("Pseudo reçu backend : " + username);
-    return NextResponse.json(username);
+    /* 
+    
+    De l'autre côté pour le composant qui récupère la réponse,
+    faire un useState pour le pseudo et faire setUsername(object.username)
+    
+    */
+    return NextResponse.json(playerInfos);
 }

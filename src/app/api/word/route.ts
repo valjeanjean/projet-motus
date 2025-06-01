@@ -1,11 +1,16 @@
 /* Route pour récupérer le mot */
 
 import db from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(){
+export async function POST(req:NextRequest, res:NextResponse){
 
     /* Récupérer/Passer en props la difficulté choisie par le joueur ? */
+
+    const body = await req.json();
+    console.log("Contenu body : " + body);
+    const playerID = body.playerID;
+    console.log(playerID);
 
     /* Variable simulant la taille du mot (En fonction de la difficulté, faire la fonctionnalité) */
     const temporaryTestNumber = 6;
@@ -37,7 +42,7 @@ export async function GET(){
         Ou faire une api route qui centralise plus de choses, SPR
     
     */
-    await db.query("INSERT INTO Game (wordToGuess)  VALUES (?)", [fetchedWord]);
+    await db.query("INSERT INTO Game (wordToGuess, playerID)  VALUES (?, ?)", [fetchedWord, playerID]);
 
     console.log(data);
 

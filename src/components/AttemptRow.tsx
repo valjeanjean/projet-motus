@@ -54,7 +54,11 @@ export default function AttemptRow({wordInfos,onAttempt}: any){
         /* Récupération des données présents dans le form */
         const formData = new FormData(event.currentTarget);
         console.log("formData = " + formData);
+        /* Modifier le nom pour playerAttempt par exemple */
         const letters = [];
+
+        const currentPlayerID = localStorage.getItem("playerID");
+        console.log(currentPlayerID);
 
         /* Initialisation du tableau avec les valeurs des inputs */
 
@@ -73,9 +77,11 @@ export default function AttemptRow({wordInfos,onAttempt}: any){
 
             method: "POST",
             headers:{ "Content-Type": "application/json" },
-            body: JSON.stringify(letters),
-            /* A check */
+            body: JSON.stringify({
 
+                letters,
+                currentPlayerID
+            })
         });
 
         const results = await correctedWord.json();

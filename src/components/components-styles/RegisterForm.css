@@ -72,26 +72,14 @@
 
 }
 
-.password-input{
-
-
-
-}  
-
-
-.username-input{
-
-
-
-}
-
 .register-form button{
 
     background-color: #ffffff; /* Green */
     border: none;
     color: #0D6EFD;
     padding: 15px 32px;
-    width: auto    text-align: center;
+    width: auto;
+    text-align: center;
     text-decoration: none;
     font-size: 1.3em;
     font-weight: bold;

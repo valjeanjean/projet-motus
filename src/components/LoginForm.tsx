@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import "./components-styles/RegisterForm.css";
 
 export default function RegisterForm(){
-
+    // faire un fetch sur /api/user/login pour recup le token
+    // et stocker le token dans le localstorage.setItem("token",to)
     return(
 
         <>

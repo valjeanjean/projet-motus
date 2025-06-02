@@ -23,13 +23,12 @@ USE `projet_motus` ;
 CREATE TABLE IF NOT EXISTS `projet_motus`.`Player` (
   `playerID` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
-  `password` VARCHAR(45) NULL,
+  `password` TEXT NULL,
   `points` INT NULL,
   `email` VARCHAR(45) NULL,
   PRIMARY KEY (`playerID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = armscii8;
-
 
 -- -----------------------------------------------------
 -- Table `projet_motus`.`Game`

@@ -74,7 +74,10 @@ export default function GameGrid(){
             const response = await fetch("/api/word", {
 
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { 
+                    "Content-Type": "application/json", 
+                    "Authorization":"Bearer "+localStorage.getItem("token")
+                },
                 body: JSON.stringify({
 
                     playerID: playerID,

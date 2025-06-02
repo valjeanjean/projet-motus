@@ -4,13 +4,11 @@ Début du projet, arborescence faite et layout fait;
 Composants : Hero fait
 Ajout de style dans le globals.css 
 
-
 Il faut rajouter les <input> dans les lignes pour chaque case pour
 que le joueur puisse écrire + qu'on puisse récupérer l'input
 
 Modifier les noms des classes/ID pour les lignes
 (AttemptRow => wordRow);
-
 
 Pour passer à la case d'après après l'input :
 
@@ -19,7 +17,6 @@ pushLater(event){
 
     event.target.nextElementSibling.focus()
 }
-
 
 Faire en sorte que lorsqu'on a vérifié pour la dernière fois le mot
 (Victoire ou défaite), supprimer de la table Game le mot à deviner
@@ -70,3 +67,5 @@ Faire en sorte de modifier le placeholder pour les lettres à la bonne place
 
 Faire un bouton rejouer lorsque la partie est terminée ? 
 Reset les valeurs attemptsNumber (0) & isGameFinished (false) ?
+
+Bien faire les variables d'environnement.

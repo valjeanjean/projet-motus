@@ -5,23 +5,23 @@ import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest){
 
-    const bcrypt = require('bcrypt');
     const saltRounds = 10;
 
     const userInfos = await req.json();
     console.log(userInfos);
     const username = userInfos.username;
     const userPassword = userInfos.password;
-
-    bcrypt.hash(userPassword, saltRounds, function(err, hash) {
-        // Store hash in your password DB.
-        console.log();
-    });
-
+    console.log(userPassword);
     const userEmail = userInfos.email;
 
+    const hashedPassword =  await bcrypt.hash(userPassword, saltRounds);
+
+    /* Puis stocké le hashed password dans la BDD */
+
+    console.log("Mot de passe hashé : " + hashedPassword);
+
     /* Ajout des infos dans la BDD et initialisation des points à 0 */
-    const [result] = await db.query<ResultSetHeader>("INSERT INTO Player (username, password, points, email)  VALUES (?, ?, ?, ?)", [username, userPassword, 0, userEmail]);
+    const [result] = await db.query<ResultSetHeader>("INSERT INTO Player (username, password, points, email)  VALUES (?, ?, ?, ?)", [username, hashedPassword, 0, userEmail]);
 
     /* Ajouter une colonne email dans la table Player */
     

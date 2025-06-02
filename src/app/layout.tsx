@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "MOTUS",
@@ -12,6 +15,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="fr">
       <head>
@@ -21,7 +25,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Header />
+          <Header />
           {children}
       </body>
     </html>

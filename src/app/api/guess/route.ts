@@ -22,9 +22,12 @@ export async function POST(req: NextRequest, res: NextResponse){
         squareIndex: number;
     }
 
-
     /* Récupération de la tentative du joueur */
-    const {guess, playerID} = await req.json();
+    const {letters:guess, currentPlayerID:playerID} = await req.json();
+    console.log("Test body : ");
+    console.log(guess);
+    console.log(playerID);
+
 
     console.log("Proposition du joueur : " + guess);
 
@@ -99,8 +102,6 @@ export async function POST(req: NextRequest, res: NextResponse){
 
         }else{
 
-            console.log("Mauvaise lettre pour la " + index + "ème case de la ligne");
-
                 /* Vérification si une des lettres envoyées est présente dans le mot */
                 
                 if(wordToFindArray.includes(letter)){
@@ -123,6 +124,9 @@ export async function POST(req: NextRequest, res: NextResponse){
                         color: "blue",
                         squareIndex: index,
                     };
+
+                    console.log("Lettre non présente pour le mot à la case " + index);
+                    console.log(results[index]);
                 }
 
 

@@ -16,10 +16,45 @@ export default function GameGrid(){
     const [wordLength, setWordLength] = useState(0);
     const [attemptsNumber, setAttemptsNumber] = useState(0);
     const [isGameFinished, setIsGameFinished] = useState(false);
+    const [difficulty, setDifficulty] = useState("Easy");
 
     function handleAttempts(){
 
-        setAttemptsNumber(attemptsNumber + 1);
+        if(attemptsNumber < maxAttempts){
+
+            setAttemptsNumber(attemptsNumber + 1);
+
+        }else{
+
+            setIsGameFinished(true);
+        }
+    }
+
+    
+    /* La difficulté ne met pas à jour */
+    
+    function updateDifficulty(event:any){
+        
+        if(difficulty == "Easy"){
+            
+            setDifficulty("Normal");
+            
+        }else if(difficulty == "Normal"){
+            
+            setDifficulty("Hard");
+            
+        }else{
+            
+            setDifficulty("Easy");
+        }
+        
+    }
+    
+    function resetGame(){
+
+        setAttemptsNumber(0);
+        setIsGameFinished(false);
+
     }
 
     useEffect(()=>{
@@ -42,7 +77,8 @@ export default function GameGrid(){
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
 
-                    playerID: playerID
+                    playerID: playerID,
+                    difficulty: difficulty
                 }),
             });
 
@@ -53,16 +89,9 @@ export default function GameGrid(){
             }
             const wordObject = await response.json();
 
-            // const response = await fetch("/api/user", {
-    
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify(userInfos),
-    
-            // });
-
             console.log("Première lettre : ");
             console.log(wordObject.firstLetter);
+
             console.log("Taille du mot : ");
             console.log(wordObject.wordLength);
             
@@ -71,13 +100,25 @@ export default function GameGrid(){
         
         getWord();
 
-    }, []);
+    }, [difficulty]);
 
     console.log(isGameFinished);
+    console.log("Nombre de tentatives : " + attemptsNumber);
 
     return(
 
         <div className="rows-container-grid">
+
+        {attemptsNumber > 0 ? (
+
+            <p className="attempts-number">Nombre de tentatives : {attemptsNumber}</p>
+            
+        ) : (
+
+            <button className="difficulty-button" onClick={updateDifficulty}>{difficulty}</button>
+
+        ) } 
+
 
             {isGameFinished ? (
 
@@ -85,6 +126,7 @@ export default function GameGrid(){
 
                     <h1 className="game-over-title">Partie terminée !</h1>
                     <p>Nombre de points : X</p>
+                    <button onClick={resetGame}>Rejouer</button>
 
                 </div>
 

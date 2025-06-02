@@ -7,6 +7,7 @@ export default function Home() {
 
     <main className="home-main">
       <Hero />
+
     </main>
   )
 }

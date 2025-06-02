@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `projet_motus`.`Player` (
   `username` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   `points` INT NULL,
+  `email` VARCHAR(45) NULL,
   PRIMARY KEY (`playerID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = armscii8;

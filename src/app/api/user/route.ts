@@ -1,22 +1,34 @@
 import db from "@/lib/db";
 import { ResultSetHeader } from "mysql2";
 import { NextResponse, NextRequest } from "next/server";
+import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest){
+
+    const bcrypt = require('bcrypt');
+    const saltRounds = 10;
 
     const userInfos = await req.json();
     console.log(userInfos);
     const username = userInfos.username;
     const userPassword = userInfos.password;
 
-    /* Ajout des infos dans la BDD et initialisation des points à 0 */
-    const [result] = await db.query<ResultSetHeader>("INSERT INTO Player (username, password, points)  VALUES (?, ?, ?)", [username, userPassword, 0]);
+    bcrypt.hash(userPassword, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+        console.log();
+    });
 
+    const userEmail = userInfos.email;
+
+    /* Ajout des infos dans la BDD et initialisation des points à 0 */
+    const [result] = await db.query<ResultSetHeader>("INSERT INTO Player (username, password, points, email)  VALUES (?, ?, ?, ?)", [username, userPassword, 0, userEmail]);
+
+    /* Ajouter une colonne email dans la table Player */
+    
     const playerInfos = {
 
         username: username,
         playerID: result.insertId,
-        
     }
 
     // Récupérer insertID ? 

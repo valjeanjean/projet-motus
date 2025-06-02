@@ -67,3 +67,6 @@ Faire en sorte de modifier le placeholder pour les lettres à la bonne place
 
 </form>
 -------------------------------------------------------------------------------------------------------------------------------------
+
+Faire un bouton rejouer lorsque la partie est terminée ? 
+Reset les valeurs attemptsNumber (0) & isGameFinished (false) ?

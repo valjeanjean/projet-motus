@@ -68,4 +68,23 @@ Faire en sorte de modifier le placeholder pour les lettres à la bonne place
 Faire un bouton rejouer lorsque la partie est terminée ? 
 Reset les valeurs attemptsNumber (0) & isGameFinished (false) ?
 
-Bien faire les variables d'environnement.
+Bien faire les variables d'environnement :
+
+Bien remplir le fichier .env, puis lorsque testé et sûr qu'il est correctement
+rempli, le renommer en .env.local, pour qu'il passe le gitignore, et qu'il soit
+utilisable en le renommant .env (à mettre dans le readme), et regarder
+plus d'infos sur le .env.local
+
+RÉGLER LE PROBLÈME OÙ LORSQUE JE REFRESH LA PAGE GAME, ÇA FAIT UN INSERT
+ET CRÉE UNE NOUVELLE LIGNE DANS LA TABLE GAME LIÉ A UN MÊME JOUEUR
+Faire un select, vérifier si il y a au moins un champ dans la colonne wordToGuess,
+si oui faire le insert, sinon le laisser
+
+Une route POST doit avoir comme paramètre seulement req, un GET un res
+
+Faire en sorte de faire une boucle sur l'objet reçu de "correction"
+pour vérifier les status (if object[i].status == "correct") goodAnswerCount += 1;
+if(goodAnswerCount == wordLength){
+
+    setIsGameFinished(true);
+}

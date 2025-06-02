@@ -2,17 +2,19 @@
 import "./components-styles/RegisterForm.css";
 import React from "react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoggingForm(){
     // faire un fetch sur /api/user/login pour recup le token
     // et stocker le token dans le localstorage.setItem("token",to)
-
+    const router = useRouter();
     const [logMessage, setLogMEssage] = useState("");
 
     async function Login(event: React.FormEvent<HTMLFormElement>){
 
         event.preventDefault();
 
+        /* Récupération inputs connexion */
         const formData = new FormData(event.currentTarget);
     
         const email = formData.get("input-email");
@@ -38,11 +40,16 @@ export default function LoggingForm(){
         if(!response){
 
             // faire qq chose ?
+            console.log("Erreur fetch vers api/user/login");
+
+        }else{
+
+            const body = await response.json();
+            setLogMEssage(body.message);
+            localStorage.setItem("token", body.token);
+
+            router.push("/game");
         }
-
-        const body = await response.json();
-
-        setLogMEssage(body.message);
     
     }
 

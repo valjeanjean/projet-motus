@@ -17,6 +17,7 @@ export default function GameGrid(){
     const [attemptsNumber, setAttemptsNumber] = useState(0);
     const [isGameFinished, setIsGameFinished] = useState(false);
     const [difficulty, setDifficulty] = useState("Easy");
+    const [points, setPoints] = useState(0);
 
     function handleAttempts(){
 

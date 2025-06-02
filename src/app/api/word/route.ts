@@ -10,34 +10,13 @@ export async function POST(req:NextRequest, res:NextResponse){
     const body = await req.json();
     console.log("Contenu body : " + body);
     const playerID = body.playerID;
-    const difficulty = body.difficulty;
-    console.log("Difficulté = " + difficulty);
     console.log(playerID);
 
-    let chosenDifficulty = 5;
-
-    if(difficulty == "Easy"){
-
-        chosenDifficulty = 5;
-    
-    }else if(difficulty == "Normal"){
-
-        chosenDifficulty = 7;
-    
-    }else if(difficulty == "Hard"){
-
-        chosenDifficulty = 9;
-
-    }else{
-
-        console.log("Erreur choix difficulté");
-        return;
-    }
-
     /* Variable simulant la taille du mot (En fonction de la difficulté, faire la fonctionnalité) */
+    const temporaryTestNumber = 6;
 
     /* Récupération d'un mot aléatoire en fonction d'une taille */
-    const urlToFetch = "https://trouve-mot.fr/api/size/" + chosenDifficulty;
+    const urlToFetch = "https://trouve-mot.fr/api/size/" + temporaryTestNumber;
     console.log(urlToFetch);
     const response = await fetch(urlToFetch);
     const data = await response.json();
@@ -63,8 +42,8 @@ export async function POST(req:NextRequest, res:NextResponse){
         Ou faire une api route qui centralise plus de choses, SPR
     
     */
+    await db.query("DELETE FROM Game WHERE playerID = ?", [playerID]);
 
-        
     await db.query("INSERT INTO Game (wordToGuess, playerID)  VALUES (?, ?)", [fetchedWord, playerID]);
 
     console.log(data);

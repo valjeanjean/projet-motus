@@ -1,3 +1,5 @@
+/* Route qui enregistre les infos lors de l'inscription du joueur */
+
 import db from "@/lib/db";
 import { ResultSetHeader } from "mysql2";
 import { NextResponse, NextRequest } from "next/server";

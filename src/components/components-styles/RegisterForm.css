@@ -1,4 +1,4 @@
-.main-register-container{
+.main-register-container, .main-login-container{
 
     height: 100%;
     margin: 0;
@@ -87,3 +87,9 @@
     cursor: pointer;
 }
 
+.is-connected{
+
+    color: rgb(255, 0, 0);
+    width: 60%;
+    text-align: center;
+}

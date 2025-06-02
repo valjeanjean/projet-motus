@@ -6,14 +6,13 @@ import "./components-styles/RegisterForm.css";
 
 export default function RegisterForm(){
 
-    async function chooseUsername(event: React.FormEvent<HTMLFormElement>){
+    async function Register(event: React.FormEvent<HTMLFormElement>){
     
         event.preventDefault();
 
         /* Stocker pseudo localstorage et faire useState composant GameGrid ? */
         
         const formData = new FormData(event.currentTarget)
-        console.log("Valeur input username = " + formData);
         
         const username = formData.get("username-input") as string;
         console.log("Pseudo choisi : " + username);
@@ -57,7 +56,7 @@ export default function RegisterForm(){
                 <h3>Vous avez déjà un compte ? Se connecter (rajouter lien)</h3>
             </div>
 
-            <form className="register-form" onSubmit={chooseUsername}>
+            <form className="register-form" onSubmit={Register}>
 
                     <input className="username-input" name="username-input" type="text" placeholder="Choisissez un pseudo"/>
                     <input type="email" name="user-email" placeholder="Entrez votre e-mail" className="email-input"/>

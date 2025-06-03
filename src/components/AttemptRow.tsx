@@ -92,7 +92,16 @@ export default function AttemptRow({wordInfos,onAttempt}: any){
             })
         });
 
-        const results = await correctedWord.json();
+        const response = await correctedWord.json();
+
+        const results = response.json();
+
+        if(results.isCorrect == true){
+
+            // Passer props au parent pour refresh ? Ou
+            // reset la game ?
+        }
+
         console.log("Résultats reçus du backend : ");
         console.log(results);
         

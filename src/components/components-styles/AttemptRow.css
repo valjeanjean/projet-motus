@@ -6,14 +6,8 @@
         
     }
     
-    #myText{
-        
-        max-height: 100%;
 
-    }
 }
-
-
 
 .single-row-container{
 
@@ -40,7 +34,7 @@
     cursor: text;
 }
 
-#myText{
+.myText{
 
     background: linear-gradient(0deg,rgba(0, 102, 208, 1) 28%, rgb(0, 143, 226) 100%);
     border: 1px solid #ffffff;
@@ -53,6 +47,30 @@
     text-transform: uppercase;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.myText.correct{
+
+    background: linear-gradient(180deg,rgba(224, 105, 105, 1) 0%, rgba(227, 118, 118, 1) 0%, rgba(255, 0, 4, 1) 100%);
+    color: white;
+
+
+}
+
+.myText.misplaced{
+
+    background: linear-gradient(180deg,rgba(224, 105, 105, 1) 0%, rgba(247, 247, 218, 1) 0%, rgba(152, 212, 23, 1) 100%);
+    
+    color: rgb(255, 255, 255);
+    
+}
+
+.myText.incorrect{
+
+    background: linear-gradient(0deg,rgba(0, 102, 208, 1) 28%, rgb(0, 143, 226) 100%) !important;
+    color: white;
+
+}
+
 
 input::placeholder{
 

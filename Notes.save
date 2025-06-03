@@ -95,3 +95,9 @@ Faire en sorte de :
     la fin de partie en mettant à jour isGameFinished
     - Mettre à jour le mot car lorsqu'il est trouvé on delete
     - Changer placeholder/couleur du mot en fonction des résultats
+
+
+Important à faire :
+
+	- Bien faire les redirections en fonction du token JWT
+	- Faire le système de gain de points ainsi que l'affichage (pour le pseudo aussi)

@@ -81,20 +81,25 @@ export async function POST(req: NextRequest) {
     const firstLetter = fetchedWord[0];
 
     const [rows]: any = await db.query(
-      "SELECT wordToGuess FROM Game WHERE playerID=?",
-      [playerID]
+
+        "SELECT wordToGuess FROM Game WHERE playerID=?", [playerID]
     );
 
     if (rows.length == 0 || !rows[0].wordToGuess) {
-      await db.query("INSERT INTO Game (wordToGuess, playerID) VALUES (?, ?)", [
-        fetchedWord,
-        playerID,
-      ]);
-    } else {
-      // On retourne seulement la première lettre et la longueur pour éviter la triche
-      return NextResponse.json({ firstLetter: firstLetter, wordLength: wordLength });
-    }
 
+        await db.query("INSERT INTO Game (wordToGuess, playerID) VALUES (?, ?)", [
+            fetchedWord,
+            playerID,
+        ]);
+
+        
+    } else {
+        // On retourne seulement la première lettre et la longueur pour éviter la triche
+
+        await db.query("UPDATE Game SET wordToGuess = ? WHERE playerID = ?", [fetchedWord, playerID]);
+
+    }
+    
     return NextResponse.json({ firstLetter: firstLetter, wordLength: wordLength });
 
   } catch (error) {

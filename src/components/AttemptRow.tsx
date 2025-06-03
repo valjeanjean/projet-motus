@@ -12,50 +12,61 @@ type Status = "misplaced" | "correct" | "incorrect";
 
 export default function AttemptRow({wordInfos, onAttempt, onSuccess}: any){
 
+    /* -------------------- Typage ------------------- */
+
+    interface Letter{
+
+        letter: string;
+        status: Status;
+        color: string;
+        squareIndex: number;
+    }
+
+    interface WordInfos {
+    
+        wordLength: number;
+        firstLetter: string;
+    }
+
+    interface AttemptRowProps {
+
+        wordInfos: WordInfos | null;
+        onAttempt: () => void;
+        onSuccess: () => void;
+    }
+
+    /* ---------------------------------------------- */
+
+
     if(!wordInfos){
 
         return null;
     }
 
-    const [letters, setLetters] = useState([]);
-    const [letterColor, setLetterColor] = useState("");
     const wordLength = wordInfos.wordLength;
     const firstLetter = wordInfos.firstLetter;
 
-    // const inputArray = [];
-    
-    // for (let i = 0; i < ; i++) {
-    //     const element = [i];
-    // }
-
-    // word.split("").map((letter,i)=>{
-    //     return <input id="myText" type="text" placeholder={letter} maxLength={1} onChange={setWord()}/>
-    // })
-
-    interface Letter{
-
-        letter: string;
-        Status: Status;
-        color: string;
-        squareIndex: number;
-    }
-
-    function handleLetterColors(results:Letter[]){
+    const [results, setResults] = useState<Letter[]>([]);
+    const [isLineLocked, setIsLineLocked] = useState(false);
 
 
-    }
 
     async function guessHandler(event: React.FormEvent<HTMLFormElement>){
 
         event.preventDefault();
 
-        console.log("aaaaaaaaaa");
-
-        /* Récupération des données présents dans le form */
+        /* Récupération des données présentes dans le form */
         const formData = new FormData(event.currentTarget);
         console.log("formData = " + formData);
-        /* Modifier le nom pour playerAttempt par exemple */
         const letters = [];
+
+        /* Initialisation du tableau avec les valeurs des inputs */
+
+        for (let i = 0; i < wordLength; i++) {
+            
+            letters[i] = formData.get("letter-" + i);
+            console.log(letters[i]);
+        }
 
         const token = localStorage.getItem("token");
         console.log("-----------Token AttemptRow---------");
@@ -66,20 +77,13 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess}: any){
             return;
         }
 
-        /* Initialisation du tableau avec les valeurs des inputs */
-
-        for (let i = 0; i < wordLength; i++) {
-            
-            letters[i] = formData.get("letter-" + i);
-            console.log(letters[i]);
-        }
 
         /* Envoi du mot vers le backend pour la vérification */
         /* À déplacer plutôt dans GameGrid ? */
 
         console.log("Proposition : " + letters);
 
-        const correctedWord = await fetch("/api/guess", {
+        const response = await fetch("/api/guess", {
 
             method: "POST",
             headers:{ 
@@ -92,63 +96,65 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess}: any){
             })
         });
 
-        const results = await correctedWord.json();
+        const data = await response.json();
 
+        console.log("----------DATA TABLEAU----------");
+        console.log(data);
 
-        console.log("----------RESULTS TABLEAU----------");
-        console.log(results);
-
-        if(results.isCorrect === true){
+        if(data.isCorrect === true){
 
             onSuccess();
             return;
-            // Passer props au parent pour refresh ? Ou
-            // reset la game ?
         }
 
-        for(let i = 0; i < results.length; i++){
-
-            if(results[i] == "correct"){
-
-                // Changer couleur de la case en rouge ?
-                // Ajouter lettre au placeholder pour la bonne case ?
-
-            }else if(results[i] == "misplaced"){
-
-                // Changer couleur de la case en jaune
-                // Else, ne rien faire
-            }   
-        }
-
-        console.log("Résultats reçus du backend : ");
-        console.log(results);
+        setResults(data.results);
+        setIsLineLocked(true);
     
         onAttempt();
     }
 
-    /* 
-    
-        Utiliser useState ? const [letterColor, setLetterColor] = useState("");
-        Puis faire des if/un switch, en fonction de la couleur, faire setLetterColor
-        de la valeur de retour de cette fonction. Mettre la variable letterColor
-        dans le "style={letterColor}";
-    
-    */
+  return (
 
-    return(
+    <form className="single-row-container" onSubmit={guessHandler}>
+      {[...Array(wordLength)].map((_, index) => {
+        // Récupérer le résultat pour cette lettre dans results (tableau d’objets)
+        const letterResult = results.find((r) => r.squareIndex === index);
+        // console.log("----------letterResult---------");
+        // console.log(letterResult);
 
-        <form className="single-row-container" onSubmit={guessHandler}>
-            
-            {/* <div className="first-letter-square"></div> */}
-            {/* { inputArray } */}
-            {/* Utilisation de l'opérateur ternaire pour afficher la première lettre seulement pour la première case */}
-            {[...Array(wordLength)].map((element, index) =>(
-                <input id="myText" key={index} name={`letter-${index}`} type="text" maxLength={1} placeholder={index == 0 ? wordInfos.firstLetter : "."}/>
-                // required ?
-            ))}
+        // Définir la couleur de fond selon le statut
+        const backgroundColor = letterResult ? letterResult.color : undefined;
+        // console.log("backgroundColor à appliqué : " + backgroundColor);
 
-            <input type="submit" hidden/>
+        // Placeholder : si première lettre, afficher la lettre initiale,
+        // sinon si lettre correcte, afficher la lettre,
+        // sinon afficher un point.
+        const placeholder =
+          index === 0
+            ? firstLetter
+            : letterResult?.status === "correct"
+            ? letterResult.letter
+            : ".";
 
-        </form>
-    )
+            console.log(`Case ${index} :`, {
+                letterResult,
+                backgroundColor,
+            });
+
+        return (
+          <input
+            key={index}
+            className={`myText ${letterResult?.status ?? ""}`}
+            name={`letter-${index}`}
+            type="text"
+            maxLength={1}
+            placeholder={placeholder}
+            autoComplete="off"
+            disabled={isLineLocked}
+          />
+        );
+      })}
+      <input type="submit" hidden />
+    </form>
+  );
 }

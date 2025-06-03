@@ -20,7 +20,7 @@ export async function POST(req: NextRequest, res: NextResponse){
     interface Letter{
 
         letter: string;
-        Status: Status;
+        status: Status;
         color: string;
         squareIndex: number;
     }
@@ -55,10 +55,6 @@ export async function POST(req: NextRequest, res: NextResponse){
 
     /* Récupération de la tentative du joueur */
     const {letters:guess} = await req.json();
-    console.log("Test body : ");
-
-    console.log(guess);
-
 
     console.log("Proposition du joueur : " + guess);
 
@@ -114,7 +110,7 @@ export async function POST(req: NextRequest, res: NextResponse){
 
             results[index] = {
                 letter: letter,
-                Status: "correct",
+                status: "correct",
                 color: "red",
                 squareIndex: index,
             };
@@ -137,46 +133,46 @@ export async function POST(req: NextRequest, res: NextResponse){
 
         }else{
 
-                /* Vérification si une des lettres envoyées est présente dans le mot */
+            /* Vérification si une des lettres envoyées est présente dans le mot */
+            
+            if(wordToFindArray.includes(letter)){
+
+                results[index] = {
+                    letter: letter,
+                    status: "misplaced",
+                    color: "yellow",
+                    squareIndex: index,
+                };
                 
-                if(wordToFindArray.includes(letter)){
+                console.log("lettre " + index + "présente dans le mot");
+                console.log(results[index]);
 
-                    results[index] = {
-                        letter: letter,
-                        Status: "misplaced",
-                        color: "yellow",
-                        squareIndex: index,
-                    };
-                    
-                    console.log("lettre " + index + "présente dans le mot");
-                    console.log(results[index]);
+            }else{
 
-                }else{
+                results[index] = {
+                    letter: letter,
+                    status: "incorrect",
+                    color: "blue",
+                    squareIndex: index,
+                };
 
-                    results[index] = {
-                        letter: letter,
-                        Status: "incorrect",
-                        color: "blue",
-                        squareIndex: index,
-                    };
-
-                    console.log("Lettre non présente pour le mot à la case " + index);
-                    console.log(results[index]);
-                }
+                console.log("Lettre non présente pour le mot à la case " + index);
+                console.log(results[index]);
+            }
 
 
-                /* 
-                
-                    Faire fonctionnalité pour vérifier si une lettre n'est pas à la
-                    bonne place mais est tout de même présente dans le mot
-                
-                */
+            /* 
+            
+                Faire fonctionnalité pour vérifier si une lettre n'est pas à la
+                bonne place mais est tout de même présente dans le mot
+            
+            */
 
         }
 
     });
 
-    return NextResponse.json(results);
+    return NextResponse.json({results});
     // Return un objet avec les lettres à la bonne place et leurs index
     // et celles présentes dans le mot mais pas à la bonne place, avec la
     // couleur associée (rouge pour bon, jaune pour bon mais pas à la bonne place)

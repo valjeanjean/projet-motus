@@ -19,6 +19,7 @@ export default function GameGrid(){
     const [isGameFinished, setIsGameFinished] = useState(false);
     const [difficulty, setDifficulty] = useState("Easy");
     const [points, setPoints] = useState(0);
+    const [updateWord, setUpdateWord] = useState(0);
 
     function handleAttempts(){
 
@@ -31,9 +32,6 @@ export default function GameGrid(){
             setIsGameFinished(true);
         }
     }
-
-    
-    /* La difficulté ne met pas à jour */
     
     function updateDifficulty(event:any){
         
@@ -55,8 +53,17 @@ export default function GameGrid(){
     function resetGame(){
 
         setAttemptsNumber(0);
-        setIsGameFinished(false);
+        if(isGameFinished == true){
+
+            setIsGameFinished(false);
+            
+        }else{
+
+            setIsGameFinished(true);
+
+        }
         setDifficulty("Easy");
+        setUpdateWord(prev => prev + 1);
     }
 
     useEffect(()=>{
@@ -112,7 +119,7 @@ export default function GameGrid(){
         
         getWord();
 
-    }, [difficulty, router]);
+    }, [difficulty, router, updateWord]);
 
     console.log(isGameFinished);
     console.log("Nombre de tentatives : " + attemptsNumber);

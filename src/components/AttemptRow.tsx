@@ -116,7 +116,8 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess}: any){
             }else if(results[i] == "misplaced"){
 
                 // Changer couleur de la case en jaune
-            }// Else, ne rien faire
+                // Else, ne rien faire
+            }   
         }
 
         console.log("Résultats reçus du backend : ");

@@ -92,9 +92,11 @@ export default function AttemptRow({wordInfos,onAttempt}: any){
             })
         });
 
-        const response = await correctedWord.json();
+        const results = await correctedWord.json();
 
-        const results = response.json();
+
+        console.log("----------RESULTS TABLEAU----------");
+        console.log(results);
 
         if(results.isCorrect == true){
 
@@ -102,13 +104,11 @@ export default function AttemptRow({wordInfos,onAttempt}: any){
             // reset la game ?
         }
 
+
+
         console.log("Résultats reçus du backend : ");
         console.log(results);
-        
-        // .then(res=>res.json());
-
-
-
+    
         onAttempt();
     }
 

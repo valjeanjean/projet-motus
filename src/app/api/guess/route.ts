@@ -45,6 +45,9 @@ export async function POST(req: NextRequest, res: NextResponse){
 
     const playerID = decoded.playerID;
 
+    console.log("------|||| PlayerID ||||-------");
+    console.log(playerID);
+
     if (!playerID) {
 
         return NextResponse.json({ message: "playerID manquant dans le token" }, { status: 401 });
@@ -55,7 +58,6 @@ export async function POST(req: NextRequest, res: NextResponse){
     console.log("Test body : ");
 
     console.log(guess);
-    console.log(playerID);
 
 
     console.log("Proposition du joueur : " + guess);

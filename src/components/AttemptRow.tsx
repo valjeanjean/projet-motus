@@ -57,8 +57,14 @@ export default function AttemptRow({wordInfos,onAttempt}: any){
         /* Modifier le nom pour playerAttempt par exemple */
         const letters = [];
 
-        const currentPlayerID = localStorage.getItem("playerID");
-        console.log(currentPlayerID);
+        const token = localStorage.getItem("token");
+        console.log("-----------Token AttemptRow---------");
+        console.log(token);
+
+        if(!token){
+
+            return;
+        }
 
         /* Initialisation du tableau avec les valeurs des inputs */
 
@@ -76,11 +82,13 @@ export default function AttemptRow({wordInfos,onAttempt}: any){
         const correctedWord = await fetch("/api/guess", {
 
             method: "POST",
-            headers:{ "Content-Type": "application/json" },
+            headers:{ 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer" + token,
+            },
             body: JSON.stringify({
 
                 letters,
-                currentPlayerID
             })
         });
 

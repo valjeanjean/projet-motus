@@ -1,5 +1,6 @@
 import db from "@/lib/db";
 import { NextApiRequest, NextApiResponse } from "next";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -25,6 +26,7 @@ export async function POST(req: NextRequest, res: NextResponse){
     /* Récupération de la tentative du joueur */
     const {letters:guess, currentPlayerID:playerID} = await req.json();
     console.log("Test body : ");
+
     console.log(guess);
     console.log(playerID);
 
@@ -54,6 +56,8 @@ export async function POST(req: NextRequest, res: NextResponse){
     const wordToFindArray = wordToFind.split("");
 
     if(guess === wordToFind){
+
+        await db.query("DELETE FROM Game WHERE playerID = ?", [playerID]);
 
         return NextResponse.json({
             

@@ -4,12 +4,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import AttemptRow from "@/components/AttemptRow";
 import "./components-styles/GameGrid.css"
+import { useRouter } from "next/navigation";
 
 export default function GameGrid(){
 
     // Variable contenant la valeur associée à la difficulté
     const maxAttempts = 6;
-    
+    const router = useRouter();
     /* Supprimer le fetch etc... */
 
     const [wordInfos, setWordInfos] = useState(null);
@@ -55,14 +56,13 @@ export default function GameGrid(){
 
         setAttemptsNumber(0);
         setIsGameFinished(false);
-
     }
 
     useEffect(()=>{
 
         async function getWord(){
 
-            const playerID = localStorage.getItem("playerID");
+            const playerID = 2;
             console.log("ID présent localStorage ? : " + playerID);
             if(!playerID){
 
@@ -72,15 +72,23 @@ export default function GameGrid(){
 
             console.log("Entrée début fonction getword");
 
+            const token = localStorage.getItem("token");
+
+            if(!token){
+
+                console.log("Erreur de récupération du token dans le local storage");
+                router.push("/login");
+                return;
+            }
+
             const response = await fetch("/api/word", {
                 method: "POST",
                 headers: { 
-                    "Content-Type": "application/json"
-                    // "Authorization":"Bearer "+localStorage.getItem("token")
+                    "Content-Type": "application/json",
+                    "Authorization":"Bearer " + token,
                 },
                 body: JSON.stringify({
 
-                    playerID: playerID,
                     difficulty: difficulty
                 }),
             });
@@ -103,7 +111,7 @@ export default function GameGrid(){
         
         getWord();
 
-    }, [difficulty]);
+    }, [difficulty, router]);
 
     console.log(isGameFinished);
     console.log("Nombre de tentatives : " + attemptsNumber);

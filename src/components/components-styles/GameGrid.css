@@ -42,7 +42,7 @@
 
 .game-over-container button{
 
-    width: 20%;
+    width: auto%;
     height: 5%;
     border: 2px solid #ffffff;
     background-color: transparent;
@@ -55,6 +55,8 @@
     text-align: center;
     cursor: pointer;
 }
+
+
 
 .difficulty-button{
 

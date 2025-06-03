@@ -1,7 +1,9 @@
 import db from "@/lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
+
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 
 type Status = "misplaced" | "correct" | "incorrect";
@@ -23,8 +25,33 @@ export async function POST(req: NextRequest, res: NextResponse){
         squareIndex: number;
     }
 
+    const cookieStored = await cookies();
+    const token = cookieStored.get("token")?.value; 
+    if(!token){
+
+        return NextResponse.json({message: "Token absent"}, {status: 401});
+    }
+
+    let decoded: any;
+    
+    try {
+
+        decoded = jwt.verify(token, JWT_SECRET) as jwt.JwtPayload;
+
+    } catch (error) {
+
+        return NextResponse.json({ message: "Token invalide" }, { status: 401 });
+    }
+
+    const playerID = decoded.playerID;
+
+    if (!playerID) {
+
+        return NextResponse.json({ message: "playerID manquant dans le token" }, { status: 401 });
+    }
+
     /* Récupération de la tentative du joueur */
-    const {letters:guess, currentPlayerID:playerID} = await req.json();
+    const {letters:guess} = await req.json();
     console.log("Test body : ");
 
     console.log(guess);
@@ -55,7 +82,9 @@ export async function POST(req: NextRequest, res: NextResponse){
     const wordToFind = words[0].wordToGuess;
     const wordToFindArray = wordToFind.split("");
 
-    if(guess === wordToFind){
+    if(guess.join('') === wordToFind){
+
+        console.log("-----------Mot trouvé!--------------");
 
         await db.query("DELETE FROM Game WHERE playerID = ?", [playerID]);
 

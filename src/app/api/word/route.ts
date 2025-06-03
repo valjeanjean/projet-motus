@@ -11,10 +11,7 @@ export async function POST(req: NextRequest) {
   try {
     const authHeader = req.headers.get("authorization");
 
-    // console.log("-------authHeader----------");
-    // console.log(authHeader);
 
-    // Vérification que le header est présent et commence bien par "Bearer "
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return NextResponse.json(
         { message: "Token invalide ou non présent" },
@@ -22,10 +19,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Récupération du token : après "Bearer "
     const token = authHeader.split(" ")[1];
-    // console.log("---------token---------------");
-    // console.log(token);
+
 
     if (!token) {
       return NextResponse.json(
@@ -101,7 +96,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ firstLetter: firstLetter, wordLength: wordLength });
-    
+
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });

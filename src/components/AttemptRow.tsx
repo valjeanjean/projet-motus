@@ -10,7 +10,7 @@ import { styleText } from "util";
 type Status = "misplaced" | "correct" | "incorrect";
 
 
-export default function AttemptRow({wordInfos,onAttempt}: any){
+export default function AttemptRow({wordInfos, onAttempt, onSuccess}: any){
 
     if(!wordInfos){
 
@@ -98,13 +98,13 @@ export default function AttemptRow({wordInfos,onAttempt}: any){
         console.log("----------RESULTS TABLEAU----------");
         console.log(results);
 
-        if(results.isCorrect == true){
+        if(results.isCorrect === true){
 
+            onSuccess();
+            return;
             // Passer props au parent pour refresh ? Ou
             // reset la game ?
         }
-
-
 
         console.log("Résultats reçus du backend : ");
         console.log(results);

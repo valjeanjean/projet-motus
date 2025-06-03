@@ -56,6 +56,7 @@ export default function GameGrid(){
 
         setAttemptsNumber(0);
         setIsGameFinished(false);
+        setDifficulty("Easy");
     }
 
     useEffect(()=>{
@@ -145,7 +146,7 @@ export default function GameGrid(){
 
                 [...Array(maxAttempts)].map((element, index) => (
                     
-                    <AttemptRow key={index} wordInfos={wordInfos} onAttempt={handleAttempts}/>
+                    <AttemptRow key={index} wordInfos={wordInfos} onAttempt={handleAttempts} onSuccess={resetGame}/>
                 ))
             )}
 

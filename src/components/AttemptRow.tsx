@@ -106,6 +106,19 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess}: any){
             // reset la game ?
         }
 
+        for(let i = 0; i < results.length; i++){
+
+            if(results[i] == "correct"){
+
+                // Changer couleur de la case en rouge ?
+                // Ajouter lettre au placeholder pour la bonne case ?
+
+            }else if(results[i] == "misplaced"){
+
+                // Changer couleur de la case en jaune
+            }// Else, ne rien faire
+        }
+
         console.log("Résultats reçus du backend : ");
         console.log(results);
     

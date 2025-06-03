@@ -88,3 +88,10 @@ if(goodAnswerCount == wordLength){
 
     setIsGameFinished(true);
 }
+
+Faire en sorte de :
+
+    - Lorsque le mot est trouvé, refresh la page ou simplement affiché
+    la fin de partie en mettant à jour isGameFinished
+    - Mettre à jour le mot car lorsqu'il est trouvé on delete
+    - Changer placeholder/couleur du mot en fonction des résultats

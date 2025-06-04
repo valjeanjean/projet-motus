@@ -14,7 +14,6 @@ export default function GameGrid(){
     /* Supprimer le fetch etc... */
 
     const [wordInfos, setWordInfos] = useState(null);
-    const [wordLength, setWordLength] = useState(0);
     const [attemptsNumber, setAttemptsNumber] = useState(0);
     const [isGameFinished, setIsGameFinished] = useState(false);
     const [difficulty, setDifficulty] = useState("Easy");
@@ -31,6 +30,11 @@ export default function GameGrid(){
 
             setIsGameFinished(true);
         }
+    }
+
+    function updatePoints(points: number){
+
+        setPoints(points);
     }
     
     function updateDifficulty(event:any){
@@ -70,14 +74,6 @@ export default function GameGrid(){
 
         async function getWord(){
 
-            const playerID = 2;
-            console.log("ID présent localStorage ? : " + playerID);
-            if(!playerID){
-
-                console.log("Erreur de récupération du playerID");
-                return;
-            }
-
             console.log("Entrée début fonction getword");
 
             const token = localStorage.getItem("token");
@@ -89,37 +85,55 @@ export default function GameGrid(){
                 return;
             }
 
-            const response = await fetch("/api/word", {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Authorization":"Bearer " + token,
-                },
-                body: JSON.stringify({
+            try{
 
-                    difficulty: difficulty
-                }),
-            });
+                const response = await fetch("/api/word", {
 
-            if(!response.ok){
-
-                console.log("Erreur lors de la récupération du mot");
-                return;
-            }
-            const wordObject = await response.json();
-
-            console.log("Première lettre : ");
-            console.log(wordObject.firstLetter);
-
-            console.log("Taille du mot : ");
-            console.log(wordObject.wordLength);
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization":"Bearer " + token,
+                    },
+                    body: JSON.stringify({
+                        
+                        difficulty: difficulty
+                    }),
+                });
             
-            setWordInfos(wordObject);
+                if(response.status == 401){
+
+                    localStorage.removeItem("token");
+                    router.push("/login");
+                    return;
+                }
+
+                if(!response.ok){
+                    
+                    console.log("Erreur lors de la récupération du mot");
+                    return;
+                }
+                const wordObject = await response.json();
+                
+                console.log("Première lettre : ");
+                console.log(wordObject.firstLetter);
+                
+                console.log("Taille du mot : ");
+                console.log(wordObject.wordLength);
+                
+                setWordInfos(wordObject);
+            
+            }catch(error){
+
+                console.log("Erreur sur le fetch vers /api/word " + error);
+                router.push("/login");
+
+            }
         }
         
         getWord();
 
     }, [difficulty, router, updateWord]);
+
 
     console.log(isGameFinished);
     console.log("Nombre de tentatives : " + attemptsNumber);
@@ -144,7 +158,7 @@ export default function GameGrid(){
                 <div className="game-over-container">
 
                     <h1 className="game-over-title">Partie terminée !</h1>
-                    <p>Nombre de points : X</p>
+                    <p>Nombre de points : {points}</p>
                     <button onClick={resetGame}>Rejouer</button>
 
                 </div>
@@ -153,7 +167,7 @@ export default function GameGrid(){
 
                 [...Array(maxAttempts)].map((element, index) => (
                     
-                    <AttemptRow key={index} wordInfos={wordInfos} onAttempt={handleAttempts} onSuccess={resetGame}/>
+                    <AttemptRow key={index} wordInfos={wordInfos} onAttempt={handleAttempts} onSuccess={resetGame} onPointsUpdate={updatePoints}/>
                 ))
             )}
 

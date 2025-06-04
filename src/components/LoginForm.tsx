@@ -3,12 +3,14 @@ import "./components-styles/RegisterForm.css";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoggingForm(){
     // faire un fetch sur /api/user/login pour recup le token
     // et stocker le token dans le localstorage.setItem("token",to)
     const router = useRouter();
     const [logMessage, setLogMEssage] = useState("");
+    const [isConnected, setIsConnected] = useState(false);
 
     async function Login(event: React.FormEvent<HTMLFormElement>){
 
@@ -47,7 +49,6 @@ export default function LoggingForm(){
             const body = await response.json();
             setLogMEssage(body.message);
             localStorage.setItem("token", body.token);
-
             router.push("/game");
         }
     
@@ -71,13 +72,9 @@ export default function LoggingForm(){
                     <input className="password-input" type="password" placeholder="Entrez votre mot de passe" name="input-password"/>
                     <button>Se connecter</button>
             </form>
-{/*         
-        <form className="chose-username-form" onSubmit={chooseUsername}>
 
-            <input placeholder="Entrez un pseudo" name="username-input" type="text" maxLength={20} className="chose-username-input"/>
-            <input type="submit" hidden/>
+            <div className="click-to-register">Pas encore inscrit ? cliquez <Link href="/register" className="go-register">ICI</Link></div>
 
-        </form> */}
         
         </>
     )

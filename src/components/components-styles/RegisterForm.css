@@ -93,3 +93,22 @@
     width: 60%;
     text-align: center;
 }
+
+.click-to-register{
+
+    color: white;
+    font-size: 1.4em;
+}
+
+.go-register{
+
+    font-weight: normal;
+    transition: font-weight 0.3s ease;
+
+}
+
+.go-register:hover{
+
+    font-weight: bold;
+
+}

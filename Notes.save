@@ -101,3 +101,9 @@ Important à faire :
 
 	- Bien faire les redirections en fonction du token JWT
 	- Faire le système de gain de points ainsi que l'affichage (pour le pseudo aussi)
+
+class myText && incorrect,misplaced,correct :
+PC: maxwidth 10%
+tel: maxwidth 15% (ou laisser 10%, a test)
+modifier font size 4em -> 3em
+height 100% tel & PC

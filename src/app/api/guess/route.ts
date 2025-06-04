@@ -78,19 +78,43 @@ export async function POST(req: NextRequest, res: NextResponse){
     }
 
     const wordToFind = words[0].wordToGuess;
+    if(!wordToFind){
+
+        console.log("Aucun mot présent en BDD");
+        return NextResponse.json({message: "Aucun mot enregistré"})
+    }
     const wordToFindArray = wordToFind.split("");
 
     if(guess.join('') === wordToFind){
 
         console.log("-----------Mot trouvé!--------------");
 
+        const pointsToAdd = 10;
+
         await db.query("DELETE FROM Game WHERE playerID = ?", [playerID]);
+ 
+        const response = await fetch("http://localhost:3000/api/user/points", {
+
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Cookie": `token=${token}`,
+            },
+            body: JSON.stringify({
+
+                pointsToAdd: pointsToAdd,
+            }),
+        });
+
+        const body = await response.json();
+        const totalPoints = body.totalPoints;
+
+        console.log("---- Le joueur a " + totalPoints + "points----");
 
         return NextResponse.json({
             
             isCorrect: true,
-            // Faire un objet plus complet ?
-
+            totalPoints: totalPoints,
         });
 
         // On renvoie un objet pour dire que le mot trouvé est le bon

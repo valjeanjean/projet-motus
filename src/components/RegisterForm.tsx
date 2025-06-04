@@ -1,16 +1,17 @@
 'use client'
 
 import React from "react";
-import { useEffect, useState } from "react";
 import "./components-styles/RegisterForm.css";
+import { emailRegex, passwordRegex, usernameRegex } from "@/utils/validation";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm(){
+
+    const router = useRouter();
 
     async function Register(event: React.FormEvent<HTMLFormElement>){
     
         event.preventDefault();
-
-        /* Stocker pseudo localstorage et faire useState composant GameGrid ? */
         
         const formData = new FormData(event.currentTarget)
         
@@ -22,6 +23,24 @@ export default function RegisterForm(){
 
         const userEmail = formData.get("user-email") as string;
         console.log("Email choisie : " + userEmail);
+
+        if(!usernameRegex.test(username)){
+
+            alert("Le pseudo doit contenir entre 3 et 20 caractères, lettres/chiffres uniquement.");
+            return;
+        }
+
+        if(!emailRegex.test(userEmail)){
+
+            alert("Adresse e-mail invalide");
+            return;
+        }
+
+        if(!passwordRegex.test(userPassword)){
+
+            alert("Le mot de passe doit faire au moins 8 caractères, avec au moins une majuscule, une minuscule et un chiffre.");
+            return;
+        }
 
         const userInfos = {
             
@@ -45,7 +64,10 @@ export default function RegisterForm(){
 
         /* Stockage du playerID dans le localstorage */
         localStorage.setItem("playerID", data.playerID);
+        localStorage.setItem("username", data.username);
 
+
+        router.push("/login");
     }
 
     return(

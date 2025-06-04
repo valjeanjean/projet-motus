@@ -10,7 +10,7 @@ import { styleText } from "util";
 type Status = "misplaced" | "correct" | "incorrect";
 
 
-export default function AttemptRow({wordInfos, onAttempt, onSuccess}: any){
+export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpdate}: any){
 
     /* -------------------- Typage ------------------- */
 
@@ -97,16 +97,22 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess}: any){
         });
 
         const data = await response.json();
+        const totalPoints = data.totalPoints;
+
+        console.log("---------totalPoints-------------");
+        console.log(totalPoints);
 
         console.log("----------DATA TABLEAU----------");
         console.log(data);
 
+        
         if(data.isCorrect === true){
 
             onSuccess();
+            onPointsUpdate(totalPoints);
             return;
         }
-
+        
         setResults(data.results);
         setIsLineLocked(true);
     

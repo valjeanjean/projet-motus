@@ -8,7 +8,7 @@
 
 header{
 
-    height: 10%;
+    height: 10vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -16,6 +16,12 @@ header{
     border: 1px solid #dfe8ff;
 
     
+}
+
+a{
+
+    text-decoration: none;
+    color: inherit;
 }
 
 .nav-list{
@@ -32,7 +38,7 @@ header{
 
 .nav-list li{
 
-    color: #59a9ff; /* bleu marine ou noir bleuté */
+    color: #59a9ff; 
     list-style: none;
     cursor: pointer;
     transition: 0.8s ease;
@@ -43,6 +49,24 @@ header{
     padding: 10px;
     font-size: 1.7em;
 
+}
+
+.log-out-button{
+
+    all: unset;
+    color: #59a9ff;
+    cursor: pointer;
+    background-color: #d4e3fa;
+    font-size: 1em;
+    list-style: none;
+    transition: all .8s;
+    border: none;
+
+}
+
+.log-out-button:hover{
+
+    color: rgb(150, 144, 144);
 }
 
 /* -------------------------------------------------- */

@@ -1,9 +1,8 @@
-/* Route pour récupérer les infos nécessaire à l'affichage du classement des joueurs */
-
 import { NextResponse, NextRequest } from "next/server";
 import db from "@/lib/db";
 import jwt from "jsonwebtoken";
 
+/* Route pour récupérer les infos nécessaire à l'affichage du classement des joueurs */
 const JWT_SECRET = process.env.JWT_SECRET!;
 
 export async function GET(req: NextRequest){
@@ -34,10 +33,4 @@ export async function GET(req: NextRequest){
 
         return NextResponse.json({message: "Token invalide"}, {status: 401});
     }
-
-
-
-
-
-
 }

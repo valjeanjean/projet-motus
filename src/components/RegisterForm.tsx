@@ -5,6 +5,7 @@ import "./components-styles/RegisterForm.css";
 import { emailRegex, passwordRegex, usernameRegex } from "@/utils/validation";
 import { useRouter } from "next/navigation";
 
+/* Composant inscription */
 export default function RegisterForm(){
 
     const router = useRouter();
@@ -24,6 +25,7 @@ export default function RegisterForm(){
         const userEmail = formData.get("user-email") as string;
         console.log("Email choisie : " + userEmail);
 
+        /* Utilisation de regex pour la sécurité utilisateur */
         if(!usernameRegex.test(username)){
 
             alert("Le pseudo doit contenir entre 3 et 20 caractères, lettres/chiffres uniquement.");
@@ -62,10 +64,9 @@ export default function RegisterForm(){
         console.log("Réponse POST pseudo client : ")
         console.log(data);
 
-        /* Stockage du playerID dans le localstorage */
+        /* Stockage du playerID + pseudo dans le localstorage */
         localStorage.setItem("playerID", data.playerID);
         localStorage.setItem("username", data.username);
-
 
         router.push("/login");
     }

@@ -6,11 +6,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function LoggingForm(){
-    // faire un fetch sur /api/user/login pour recup le token
-    // et stocker le token dans le localstorage.setItem("token",to)
+
     const router = useRouter();
     const [logMessage, setLogMEssage] = useState("");
-    const [isConnected, setIsConnected] = useState(false);
 
     async function Login(event: React.FormEvent<HTMLFormElement>){
 
@@ -41,7 +39,6 @@ export default function LoggingForm(){
 
         if(!response){
 
-            // faire qq chose ?
             console.log("Erreur fetch vers api/user/login");
 
         }else{
@@ -51,7 +48,6 @@ export default function LoggingForm(){
             localStorage.setItem("token", body.token);
             router.push("/game");
         }
-    
     }
 
     return(

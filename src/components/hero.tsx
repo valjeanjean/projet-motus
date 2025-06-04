@@ -1,7 +1,6 @@
 'use client'
 
 import React from "react";
-import { useState, useEffect } from "react";
 import "./hero.css";
 import Link from "next/link";
 
@@ -21,7 +20,7 @@ export default function Hero(){
             </div>
 
             <div className="play-button-container">
-                <Link href="/game"><button>JOUER</button></Link>
+                <Link href="/game"><button className="go-play">JOUER</button></Link>
             </div>
 
         </>

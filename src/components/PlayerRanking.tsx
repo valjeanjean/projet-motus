@@ -11,6 +11,7 @@ type Player = {
     points: number;
 }
 
+/* Composant chargé d'afficher le classement des joueurs */
 export default function PlayerRanking(){
 
     const [players, setPlayers] = useState<Player[]>([]);
@@ -22,7 +23,6 @@ export default function PlayerRanking(){
         async function getRanks(){
 
             const token = localStorage.getItem("token");
-
             if(!token){
 
                 console.log("Token absent");

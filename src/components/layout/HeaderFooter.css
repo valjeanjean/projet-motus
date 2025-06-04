@@ -14,14 +14,6 @@ header{
     justify-content: center;
     background-color: #afd6fa;
     border: 1px solid #dfe8ff;
-
-    
-}
-
-a{
-
-    text-decoration: none;
-    color: inherit;
 }
 
 .nav-list{
@@ -31,9 +23,7 @@ a{
     justify-content: space-around;
     align-items: center;
     font-weight: bold;
-    padding: 10px;
-    
-    
+    padding: 10px;    
 }
 
 .nav-list li{
@@ -48,7 +38,7 @@ a{
     background-color: #d4e3fa;
     padding: 10px;
     font-size: 1.7em;
-
+    text-align: center;
 }
 
 .log-out-button{
@@ -61,7 +51,6 @@ a{
     list-style: none;
     transition: all .8s;
     border: none;
-
 }
 
 .log-out-button:hover{
@@ -91,6 +80,5 @@ a{
     color: rgb(86, 106, 216);
     border: 1px solid rgb(86, 106, 216);
 }
-
 
 /* ---------------------------------------------------- */

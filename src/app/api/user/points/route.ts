@@ -7,13 +7,11 @@ import { RowDataPacket } from "mysql2";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
-
+/* Route qui s'occupe de mettre à jour les points & de renvoyer le total de points du joueur */
 export async function POST(req: NextRequest){
 
     console.log("Réponse route /points");
-    
-    /* Faire en sorte d'ajouter les points puis de renvoyer le total de points */
-    
+        
     const cookieStored = await cookies();
     const token = cookieStored.get("token")?.value;
     

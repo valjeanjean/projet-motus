@@ -1,8 +1,8 @@
 'use client'
 import React from "react";
-import { useState, useEffect } from "react";
 import LoggingForm from "@/components/LoginForm";
 
+/* Page connexion */
 export default function Login(){
 
     return(

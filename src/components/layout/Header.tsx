@@ -6,6 +6,7 @@ import "../layout/HeaderFooter.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+/* Composant chargé de l'affichage du Header */
 export default function Header(){
 
     const [username, setUsername] = useState("Invité");
@@ -32,7 +33,6 @@ export default function Header(){
         document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/login;";
         setIsLoggedIn(false);
         router.push("/login");
-
     }
 
     return(

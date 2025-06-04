@@ -1,17 +1,10 @@
 @media only screen and (max-width: 600px) {
   
-    .ranking-main-container{
-
-
-    }
-    
     .player-ranks-container{
 
 
         width: 80% !important;
     }
-
-
 }
 
 
@@ -65,7 +58,7 @@
 
 .player-rank-row:hover{
 
-  background-color: #50bcff; /* Highlight au survol */
+  background-color: #50bcff; 
   cursor: pointer;
 }
 

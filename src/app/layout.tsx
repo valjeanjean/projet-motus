@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "MOTUS",

@@ -1,10 +1,9 @@
 'use client'
 
 import React from "react";
-import { useState, useEffect } from "react";
 import GameGrid from "@/components/GameGrid";
 
-
+/* Page de jeu */
 export default function GamePage(){
 
     return(

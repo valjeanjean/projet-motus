@@ -5,18 +5,11 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
-
 type Status = "misplaced" | "correct" | "incorrect";
 
 export async function POST(req: NextRequest, res: NextResponse){
- 
-    /* 
 
-        Envoyer dans la requête le playerID préalablement stocké dans
-        le local storage (Faire la fonctionnalité)
-
-    */
-
+    /* Typage de l'objet Letter */
     interface Letter{
 
         letter: string;
@@ -25,6 +18,7 @@ export async function POST(req: NextRequest, res: NextResponse){
         squareIndex: number;
     }
 
+    /* Récupération du token dans les cookies */
     const cookieStored = await cookies();
     const token = cookieStored.get("token")?.value; 
     if(!token){
@@ -58,18 +52,10 @@ export async function POST(req: NextRequest, res: NextResponse){
 
     console.log("Proposition du joueur : " + guess);
 
-    /* Récupération du mot à trouver dans la BDD */
-
-    // db.execute('INSERT ?')
-
     const [words]: any = await db.execute(
 
         'SELECT wordToGuess FROM Game WHERE playerID = ?', [playerID]
     );
-
-    // Faire vérification pour être sûr que words contient bien le mot désiré
-    // Si ça contient bien un mot, supprimer le mot présent dans la table Game pour le playerID du joueur
-    // Sinon, juste faire un INSERT
 
     console.log("Mot à deviner : " , words);
     if(words.length <= 0){
@@ -111,13 +97,12 @@ export async function POST(req: NextRequest, res: NextResponse){
 
         console.log("---- Le joueur a " + totalPoints + "points----");
 
+        // On renvoie un objet pour dire que le mot trouvé est le bon + le rappel de points totaux
         return NextResponse.json({
             
             isCorrect: true,
             totalPoints: totalPoints,
         });
-
-        // On renvoie un objet pour dire que le mot trouvé est le bon
     }
 
     let results: Letter[] = [];
@@ -126,9 +111,7 @@ export async function POST(req: NextRequest, res: NextResponse){
         
         console.log("Index actuel : ", index);
 
-
         if(letter == wordToFindArray[index]){
-
 
             console.log("Bonne lettre pour la " + index + "ème case de la ligne");
 
@@ -142,23 +125,9 @@ export async function POST(req: NextRequest, res: NextResponse){
             console.log("Vérif : ");
             console.log(results[index]);
         
-            /*
-
-                Pour lorsque la lettre est présente mais pas au bon index (Yellow):
-
-                {
-                    letter: X
-                    Status: misplaced
-                    color: yellow
-                    squareIndex:
-                }
-
-            */
-
         }else{
 
             /* Vérification si une des lettres envoyées est présente dans le mot */
-            
             if(wordToFindArray.includes(letter)){
 
                 results[index] = {
@@ -183,22 +152,11 @@ export async function POST(req: NextRequest, res: NextResponse){
                 console.log("Lettre non présente pour le mot à la case " + index);
                 console.log(results[index]);
             }
-
-
-            /* 
-            
-                Faire fonctionnalité pour vérifier si une lettre n'est pas à la
-                bonne place mais est tout de même présente dans le mot
-            
-            */
-
         }
-
     });
 
-    return NextResponse.json({results});
     // Return un objet avec les lettres à la bonne place et leurs index
     // et celles présentes dans le mot mais pas à la bonne place, avec la
     // couleur associée (rouge pour bon, jaune pour bon mais pas à la bonne place)
-
+    return NextResponse.json({results});
 }

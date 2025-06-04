@@ -3,12 +3,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./components-styles/AttemptRow.css";
-import { styleText } from "util";
-
-// wordLength: number 
 
 type Status = "misplaced" | "correct" | "incorrect";
-
 
 export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpdate}: any){
 
@@ -16,27 +12,26 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpd
 
     interface Letter{
 
-        letter: string;
-        status: Status;
-        color: string;
-        squareIndex: number;
+      letter: string;
+      status: Status;
+      color: string;
+      squareIndex: number;
     }
 
     interface WordInfos {
     
-        wordLength: number;
-        firstLetter: string;
+      wordLength: number;
+      firstLetter: string;
     }
 
     interface AttemptRowProps {
 
-        wordInfos: WordInfos | null;
-        onAttempt: () => void;
-        onSuccess: () => void;
+      wordInfos: WordInfos | null;
+      onAttempt: () => void;
+      onSuccess: () => void;
     }
 
     /* ---------------------------------------------- */
-
 
     if(!wordInfos){
 
@@ -49,74 +44,69 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpd
     const [results, setResults] = useState<Letter[]>([]);
     const [isLineLocked, setIsLineLocked] = useState(false);
 
-
-
     async function guessHandler(event: React.FormEvent<HTMLFormElement>){
 
-        event.preventDefault();
+      event.preventDefault();
 
-        /* Récupération des données présentes dans le form */
-        const formData = new FormData(event.currentTarget);
-        console.log("formData = " + formData);
-        const letters = [];
+      /* Récupération des données présentes dans le form */
+      const formData = new FormData(event.currentTarget);
+      console.log("formData = " + formData);
+      const letters = [];
 
-        /* Initialisation du tableau avec les valeurs des inputs */
+      /* Initialisation du tableau avec les valeurs des inputs */
+      for (let i = 0; i < wordLength; i++) {
+          
+          letters[i] = formData.get("letter-" + i);
+          console.log(letters[i]);
+      }
 
-        for (let i = 0; i < wordLength; i++) {
-            
-            letters[i] = formData.get("letter-" + i);
-            console.log(letters[i]);
-        }
+      const token = localStorage.getItem("token");
+      console.log("-----------Token AttemptRow---------");
+      console.log(token);
 
-        const token = localStorage.getItem("token");
-        console.log("-----------Token AttemptRow---------");
-        console.log(token);
+      if(!token){
 
-        if(!token){
+        return;
+      }
 
-            return;
-        }
+      /* Envoi du mot vers le backend pour la vérification */
+      /* À déplacer plutôt dans GameGrid ? */
 
+      console.log("Proposition : " + letters);
 
-        /* Envoi du mot vers le backend pour la vérification */
-        /* À déplacer plutôt dans GameGrid ? */
+      const response = await fetch("/api/guess", {
 
-        console.log("Proposition : " + letters);
+          method: "POST",
+          headers:{ 
+              "Content-Type": "application/json",
+              "Authorization": "Bearer" + token,
+          },
+          body: JSON.stringify({
 
-        const response = await fetch("/api/guess", {
+              letters,
+          })
+      });
 
-            method: "POST",
-            headers:{ 
-                "Content-Type": "application/json",
-                "Authorization": "Bearer" + token,
-            },
-            body: JSON.stringify({
+      const data = await response.json();
+      const totalPoints = data.totalPoints;
 
-                letters,
-            })
-        });
+      console.log("---------totalPoints-------------");
+      console.log(totalPoints);
 
-        const data = await response.json();
-        const totalPoints = data.totalPoints;
+      console.log("----------DATA TABLEAU----------");
+      console.log(data);
+      
+      if(data.isCorrect === true){
 
-        console.log("---------totalPoints-------------");
-        console.log(totalPoints);
-
-        console.log("----------DATA TABLEAU----------");
-        console.log(data);
-
-        
-        if(data.isCorrect === true){
-
-            onSuccess();
-            onPointsUpdate(totalPoints);
-            return;
-        }
-        
-        setResults(data.results);
-        setIsLineLocked(true);
-    
-        onAttempt();
+          onSuccess();
+          onPointsUpdate(totalPoints);
+          return;
+      }
+      
+      setResults(data.results);
+      setIsLineLocked(true);
+  
+      onAttempt();
     }
 
   return (
@@ -125,16 +115,16 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpd
       {[...Array(wordLength)].map((_, index) => {
         // Récupérer le résultat pour cette lettre dans results (tableau d’objets)
         const letterResult = results.find((r) => r.squareIndex === index);
-        // console.log("----------letterResult---------");
-        // console.log(letterResult);
 
         // Définir la couleur de fond selon le statut
         const backgroundColor = letterResult ? letterResult.color : undefined;
-        // console.log("backgroundColor à appliqué : " + backgroundColor);
 
-        // Placeholder : si première lettre, afficher la lettre initiale,
-        // sinon si lettre correcte, afficher la lettre,
-        // sinon afficher un point.
+        /* 
+          Placeholder : si première lettre, afficher la lettre initiale,
+          sinon si lettre correcte, afficher la lettre,
+          sinon afficher un point.
+        */ 
+       
         const placeholder =
           index === 0
             ? firstLetter

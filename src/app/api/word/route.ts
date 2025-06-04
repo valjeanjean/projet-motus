@@ -7,13 +7,17 @@ if (!JWT_SECRET) {
   throw new Error("JWT_SECRET non défini dans le fichier .env");
 }
 
+/* Route qui récupère le mot à deviner */
 export async function POST(req: NextRequest) {
+
   try {
+
     const authHeader = req.headers.get("authorization");
 
-
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
+
       return NextResponse.json(
+
         { message: "Token invalide ou non présent" },
         { status: 401 }
       );
@@ -21,18 +25,23 @@ export async function POST(req: NextRequest) {
 
     const token = authHeader.split(" ")[1];
 
-
     if (!token) {
+
       return NextResponse.json(
+
         { message: "Token manquant après Bearer" },
         { status: 401 }
       );
     }
 
     let decoded: any;
+
     try {
+
       decoded = jwt.verify(token, JWT_SECRET) as jwt.JwtPayload;
+
     } catch (error) {
+
       return NextResponse.json({ message: "Token invalide" }, { status: 401 });
     }
 
@@ -41,7 +50,9 @@ export async function POST(req: NextRequest) {
     console.log(playerID);
 
     if (!playerID) {
+
       return NextResponse.json(
+
         { message: "PlayerID non présent dans le token" },
         { status: 401 }
       );
@@ -94,16 +105,16 @@ export async function POST(req: NextRequest) {
 
         
     } else {
-        // On retourne seulement la première lettre et la longueur pour éviter la triche
 
-        await db.query("UPDATE Game SET wordToGuess = ? WHERE playerID = ?", [fetchedWord, playerID]);
-
+      // On retourne seulement la première lettre et la longueur pour éviter la triche
+      await db.query("UPDATE Game SET wordToGuess = ? WHERE playerID = ?", [fetchedWord, playerID]);
     }
     
     return NextResponse.json({ firstLetter: firstLetter, wordLength: wordLength });
 
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
+    
+      console.error(error);
+      return NextResponse.json({ message: "Erreur serveur" }, { status: 500 });
   }
 }

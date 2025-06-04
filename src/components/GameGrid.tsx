@@ -8,10 +8,8 @@ import { useRouter } from "next/navigation";
 
 export default function GameGrid(){
 
-    // Variable contenant la valeur associée à la difficulté
-    const maxAttempts = 6;
+    const maxAttempts = 5;
     const router = useRouter();
-    /* Supprimer le fetch etc... */
 
     const [wordInfos, setWordInfos] = useState(null);
     const [attemptsNumber, setAttemptsNumber] = useState(0);
@@ -22,11 +20,10 @@ export default function GameGrid(){
 
     function handleAttempts(){
 
-        if(attemptsNumber < maxAttempts){
+        const newAttempts = attemptsNumber + 1;
+        setAttemptsNumber(newAttempts);
 
-            setAttemptsNumber(attemptsNumber + 1);
-
-        }else{
+        if(newAttempts >= maxAttempts){
 
             setIsGameFinished(true);
         }
@@ -57,15 +54,7 @@ export default function GameGrid(){
     function resetGame(){
 
         setAttemptsNumber(0);
-        if(isGameFinished == true){
-
-            setIsGameFinished(false);
-            
-        }else{
-
-            setIsGameFinished(true);
-
-        }
+       
         setDifficulty("Easy");
         setUpdateWord(prev => prev + 1);
     }
@@ -126,14 +115,12 @@ export default function GameGrid(){
 
                 console.log("Erreur sur le fetch vers /api/word " + error);
                 router.push("/login");
-
             }
         }
         
         getWord();
 
     }, [difficulty, router, updateWord]);
-
 
     console.log(isGameFinished);
     console.log("Nombre de tentatives : " + attemptsNumber);
@@ -151,7 +138,6 @@ export default function GameGrid(){
             <button className="difficulty-button" onClick={updateDifficulty}>{difficulty}</button>
 
         ) } 
-
 
             {isGameFinished ? (
 

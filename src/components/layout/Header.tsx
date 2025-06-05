@@ -41,7 +41,7 @@ export default function Header(){
             
             <ul className="nav-list">
                 <li className="jouer"><Link href="/game">Jouer</Link></li>
-                <li className="hall-of-fame"><Link href="/ranking">Hall of Fame</Link></li>
+                <li className="hall-of-fame"><Link href="/ranking">Wall of Fame</Link></li>
                 <li className="sign-in-up">
                 {isLoggedIn ? (
 

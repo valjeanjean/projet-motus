@@ -2,12 +2,10 @@
 import "./components-styles/RegisterForm.css";
 import React from "react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function LoggingForm(){
 
-    const router = useRouter();
     const [logMessage, setLogMEssage] = useState("");
 
     async function Login(event: React.FormEvent<HTMLFormElement>){

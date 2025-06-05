@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function GameGrid(){
 
-    const maxAttempts = 5;
+    const maxAttempts = 6;
     const router = useRouter();
 
     const [wordInfos, setWordInfos] = useState(null);
@@ -27,6 +27,12 @@ export default function GameGrid(){
 
             setIsGameFinished(true);
         }
+    }
+
+    function replayGame(){
+
+        setIsGameFinished(false);
+        setAttemptsNumber(0);
     }
 
     function updatePoints(points: number){
@@ -54,12 +60,14 @@ export default function GameGrid(){
     function resetGame(){
 
         setAttemptsNumber(0);
-       
+        setIsGameFinished(true);
         setDifficulty("Easy");
         setUpdateWord(prev => prev + 1);
     }
 
     useEffect(()=>{
+
+
 
         async function getWord(){
 
@@ -145,7 +153,7 @@ export default function GameGrid(){
 
                     <h1 className="game-over-title">Partie terminée !</h1>
                     <p>Nombre de points : {points}</p>
-                    <button onClick={resetGame}>Rejouer</button>
+                    <button onClick={replayGame}>Rejouer</button>
 
                 </div>
 

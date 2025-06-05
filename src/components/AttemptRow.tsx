@@ -55,9 +55,10 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpd
 
       /* Initialisation du tableau avec les valeurs des inputs */
       for (let i = 0; i < wordLength; i++) {
-          
-          letters[i] = formData.get("letter-" + i);
-          console.log(letters[i]);
+        
+        letters[i] = formData.get("letter-" + i);
+        console.log(letters[i]);
+
       }
 
       const token = localStorage.getItem("token");
@@ -82,12 +83,15 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpd
               "Authorization": "Bearer" + token,
           },
           body: JSON.stringify({
-
               letters,
           })
       });
 
       const data = await response.json();
+
+      console.log("--------DATA RESULTS-------");
+      console.log(data.results);
+
       const totalPoints = data.totalPoints;
 
       console.log("---------totalPoints-------------");

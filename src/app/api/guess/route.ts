@@ -48,9 +48,12 @@ export async function POST(req: NextRequest, res: NextResponse){
     }
 
     /* Récupération de la tentative du joueur */
-    const {letters:guess} = await req.json();
-
-    console.log("Proposition du joueur : " + guess);
+    const {letters} = await req.json();
+    const guess = letters.map((c : string)=>{
+        
+        return c.toLowerCase()
+    })
+    console.log({guess});
 
     const [words]: any = await db.execute(
 

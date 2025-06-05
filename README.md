@@ -59,6 +59,12 @@ Pour initialiser le container, dans votre terminal exécutez la commande suivant
 docker compose up -d
 ```
 
+Si vous rencontrez une erreur lors du lancement du docker compose, lancez cette commande :
+
+```bash
+systemctl stop mysql
+```
+
 Ensuite, lancez le serveur de développement :
 
 ```bash

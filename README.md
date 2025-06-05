@@ -4,6 +4,8 @@
 
 Motus est un jeu de devinettes dans lequel le joueur doit retrouver un mot mystère. À chaque tentative, il reçoit des indices sur la position et la présence des lettres, à la manière du jeu télévisé du même nom. Si une case apparait rouge, vous avez trouvé la bonne lettre à la bonne case. Lorsqu'elle apparait jaune, c'est que la lettre n'est pas à la bonne case mais est tout de même présente dans le mot. Système de partie unique avec un gain de 10 points par victoire. Un classement des 10 premiers joueurs est proposé sur la page Hall of Fame.
 
+Il est également possible parfois que les placeholder des balises n'apparaissent pas, il suffit de recharger la page si cela arrive.
+
 # Stack
 
 Ce projet repose sur la stack suivante : Next.js pour le frontend et les routes API, MySQL pour la base de données, et JWT pour la gestion de l’authentification. L'API utilisée pour la génération de mot : https://trouve-mot.fr

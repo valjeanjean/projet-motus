@@ -46,7 +46,7 @@ export default function LoggingForm(){
             const body = await response.json();
             setLogMEssage(body.message);
             localStorage.setItem("token", body.token);
-            router.push("/game");
+            window.location.href = "/game";
         }
     }
 

@@ -1,3 +1,14 @@
+@media only screen and (max-width: 600px) {
+  
+    .register-titles-container h3{
+
+        padding-bottom: 100px;
+
+    }   
+
+
+}
+
 .main-register-container, .main-login-container{
 
     height: 100%;
@@ -33,6 +44,7 @@
 .register-titles-container h3{
 
     font-size: 2em;
+
 
 }
 
@@ -111,4 +123,16 @@
 
     font-weight: bold;
 
+}
+
+.go-connect{
+
+    font-size: 1em;
+}
+
+.go-connect:hover{
+    
+    color: #a1c7ff;
+    font-size: 1.1em;
+    transition: font-size 0.3s ease;
 }

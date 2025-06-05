@@ -4,6 +4,7 @@ import React from "react";
 import "./components-styles/RegisterForm.css";
 import { emailRegex, passwordRegex, usernameRegex } from "@/utils/validation";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 /* Composant inscription */
 export default function RegisterForm(){
@@ -76,7 +77,7 @@ export default function RegisterForm(){
         <>
             <div className="register-titles-container">
                 <h1>S'inscrire</h1>
-                <h3>Vous avez déjà un compte ? Se connecter (rajouter lien)</h3>
+                <h3>Vous avez déjà un compte ? <br/><Link href="/login" className="go-connect">Se connecter</Link></h3>
             </div>
 
             <form className="register-form" onSubmit={Register}>

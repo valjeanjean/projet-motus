@@ -3,10 +3,12 @@
     .single-row-container div{
 
         max-height: 100%;
-        
     }
-    
 
+    .myText{
+
+        height: 75% !important;
+    }
 }
 
 .single-row-container{

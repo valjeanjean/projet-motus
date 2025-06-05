@@ -21,6 +21,7 @@ export default function Header(){
             setUsername(storedUsername);
         }
         const token = localStorage.getItem("token");
+
         setIsLoggedIn(!!token);
     
     }, [router]);
@@ -29,8 +30,7 @@ export default function Header(){
 
         localStorage.removeItem("token");
         localStorage.removeItem("username");
-        localStorage.removeItem("playerID");
-        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/login;";
+        localStorage.removeItem("playerID");            
         setIsLoggedIn(false);
         router.push("/login");
     }
@@ -46,6 +46,7 @@ export default function Header(){
                 {isLoggedIn ? (
 
                     <button onClick={handleLogout} className="log-out-button">Déconnexion</button>
+
                 ) : (
                     
                     <Link href="/login">Connexion</Link>

@@ -8,6 +8,14 @@ Attention : Si un mot contient un accent, il faudra le mettre car le jeu est acc
 
 Il est également possible parfois que les placeholder des balises pour la connexion n'apparaissent pas, il suffit de recharger la page si cela arrive.
 
+# Connexion
+
+Pour pouvoir jouer au jeu, il faudra vous connecter :
+
+   - Aller sur la page "Connexion",
+   - Cliquer sur ICI en dessous des inputs identifiants,
+   - S'inscrire puis se connecter
+
 # Stack
 
 Ce projet repose sur la stack suivante : Next.js pour le frontend et les routes API, MySQL pour la base de données, et JWT pour la gestion de l’authentification. L'API utilisée pour la génération de mot : https://trouve-mot.fr

@@ -1,10 +1,50 @@
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 750px) {
   
     .register-titles-container h3{
 
         padding-bottom: 100px;
+        font-size: 1.5em !important;
 
     }   
+
+    .register-titles-container h1{
+
+        font-size: 3em !important;
+    }
+
+    .register-form{
+
+        gap: 2em !important;
+        width: 100% !important;
+    }
+
+
+    .register-titles-container{
+
+        width: 100% !important;
+        height: 5% !important;
+    }
+
+    .login-titles-container{
+
+        width: 80% !important;
+    }
+
+    .login-titles-container h1{
+
+        font-size: 3em !important;
+    }
+
+
+    .click-to-register{
+
+        height: 10% !important;
+    }
+
+
+}
+
+@media only screen and (max-width: 750px) {
 
 
 }
@@ -35,6 +75,20 @@
     justify-content: center;
 }
 
+.login-titles-container{
+
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 60%;
+    height: 25%;
+    padding-top: 20px;
+    justify-content: center;
+
+}
+
 .register-titles-container h1{
 
     font-size: 4em;
@@ -44,8 +98,6 @@
 .register-titles-container h3{
 
     font-size: 2em;
-
-
 }
 
 

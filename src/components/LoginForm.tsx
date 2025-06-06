@@ -51,7 +51,7 @@ export default function LoggingForm(){
     return(
 
         <>
-            <div className="register-titles-container">
+            <div className="login-titles-container">
                 <h1>Connexion</h1>
                 <h3>Entrez vos identifiants de connexion pour jouer</h3>
             </div>

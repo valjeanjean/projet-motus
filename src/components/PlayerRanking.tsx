@@ -59,7 +59,7 @@ export default function PlayerRanking(){
 
     return(
         <>
-            <h1 className="ranking-title">Hall of Fame</h1>
+            <h1 className="ranking-title">Wall of Fame</h1>
                 <div className="player-ranks-container">
                 {players.map((player, index) => (
                     

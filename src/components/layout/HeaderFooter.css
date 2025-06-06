@@ -3,6 +3,10 @@
     .nav-list li{
 
         font-size: 1.2em !important;
+        height: 40Px;
+        display: flex;
+        align-items: center;
+        justify-items: center;
     }
 }
 
@@ -35,6 +39,7 @@ header{
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);   
     border: 1px solid #ccc; 
     border-radius: 10px;
+    text-align: center;
     background-color: #d4e3fa;
     padding: 10px;
     font-size: 1.7em;
@@ -55,7 +60,7 @@ header{
 
 .log-out-button:hover{
 
-    color: rgb(150, 144, 144);
+    color: rgb(173, 1, 1);
 }
 
 /* -------------------------------------------------- */

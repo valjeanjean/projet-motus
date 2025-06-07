@@ -6,6 +6,7 @@ import "./components-styles/AttemptRow.css";
 
 type Status = "misplaced" | "correct" | "incorrect";
 
+/* Composant affichage lignes de jeu */
 export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpdate}: any){
 
     /* -------------------- Typage ------------------- */
@@ -71,7 +72,6 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpd
       }
 
       /* Envoi du mot vers le backend pour la vérification */
-      /* À déplacer plutôt dans GameGrid ? */
 
       console.log("Proposition : " + letters);
 
@@ -122,12 +122,6 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpd
 
         // Définir la couleur de fond selon le statut
         const backgroundColor = letterResult ? letterResult.color : undefined;
-
-        /* 
-          Placeholder : si première lettre, afficher la lettre initiale,
-          sinon si lettre correcte, afficher la lettre,
-          sinon afficher un point.
-        */ 
        
         const placeholder =
           index === 0

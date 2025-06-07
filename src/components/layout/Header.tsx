@@ -9,22 +9,16 @@ import { useRouter } from "next/navigation";
 /* Composant chargé de l'affichage du Header */
 export default function Header(){
 
-    const [username, setUsername] = useState("Invité");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const router = useRouter();
 
     useEffect(()=>{
 
-        const storedUsername = localStorage.getItem("username");
-        if(storedUsername){
-
-            setUsername(storedUsername);
-        }
         const token = localStorage.getItem("token");
 
         setIsLoggedIn(!!token);
     
-    }, [router]);
+    });
 
     function handleLogout(){
 

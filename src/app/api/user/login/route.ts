@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "Aucun utilisateur ne correspond à cet email" }, { status: 401 });
     }
 
+    const username = user[0].username; 
     const hashedPassword = user[0].password;
     const isPasswordValid = await bcrypt.compare(sentPassword, hashedPassword);
 
@@ -38,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     console.log("Connexion réusie, set du token dans les cookies");
     
-    const response = NextResponse.json({ success: true, message: "Connexion réussie", token: token });
+    const response = NextResponse.json({ success: true, message: "Connexion réussie", token: token, username: username });
     response.cookies.set("token", token, {
 
       httpOnly: true,

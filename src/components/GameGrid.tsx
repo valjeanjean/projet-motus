@@ -6,6 +6,7 @@ import AttemptRow from "@/components/AttemptRow";
 import "./components-styles/GameGrid.css"
 import { useRouter } from "next/navigation";
 
+/* Composant affichage grille de jeu */
 export default function GameGrid(){
 
     const maxAttempts = 6;
@@ -17,6 +18,7 @@ export default function GameGrid(){
     const [difficulty, setDifficulty] = useState("Easy");
     const [points, setPoints] = useState(0);
     const [updateWord, setUpdateWord] = useState(0);
+    const [username, setUsername] = useState("Invité");
 
     function handleAttempts(){
 
@@ -28,6 +30,7 @@ export default function GameGrid(){
             setIsGameFinished(true);
         }
     }
+
 
     function replayGame(){
 
@@ -66,8 +69,6 @@ export default function GameGrid(){
     }
 
     useEffect(()=>{
-
-
 
         async function getWord(){
 
@@ -126,6 +127,17 @@ export default function GameGrid(){
             }
         }
         
+         function getUsername(){
+
+            const pseudo = localStorage.getItem("username");
+            if(pseudo){
+
+                setUsername(pseudo);
+            }
+        }
+
+        getUsername();
+
         getWord();
 
     }, [difficulty, router, updateWord]);
@@ -136,6 +148,7 @@ export default function GameGrid(){
     return(
 
         <div className="rows-container-grid">
+            <div className="display-username">{username}</div>
 
         {attemptsNumber > 0 ? (
 

@@ -4,6 +4,7 @@ import React from "react";
 import "./hero.css";
 import Link from "next/link";
 
+/* Composant affichage page d'accueil */
 export default function Hero(){
 
     return(

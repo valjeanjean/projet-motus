@@ -4,6 +4,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+/* Composant page connexion */
 export default function LoggingForm(){
 
     const [logMessage, setLogMEssage] = useState("");
@@ -43,6 +44,11 @@ export default function LoggingForm(){
 
             const body = await response.json();
             setLogMEssage(body.message);
+            const username = body.username;
+            if(username){
+
+                localStorage.setItem("username", username);
+            }
             localStorage.setItem("token", body.token);
             window.location.href = "/game";
         }

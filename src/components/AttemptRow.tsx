@@ -25,13 +25,6 @@ export default function AttemptRow({wordInfos, onAttempt, onSuccess, onPointsUpd
       firstLetter: string;
     }
 
-    interface AttemptRowProps {
-
-      wordInfos: WordInfos | null;
-      onAttempt: () => void;
-      onSuccess: () => void;
-    }
-
     /* ---------------------------------------------- */
 
     if(!wordInfos){
